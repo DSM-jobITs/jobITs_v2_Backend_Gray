@@ -9,9 +9,12 @@
     "moduleResolution": "Node",
     "sourceMap": true,
     "baseUrl": "./src",
+    "paths": {
+      "@/*": ["*"]
+    },
     "experimentalDecorators": true,
     "emitDecoratorMetadata": true
   },
-  "include": ["./src/**/*"],
+  "include": ["src"],
   "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
 }
