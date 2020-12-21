@@ -1,6 +1,6 @@
 import * as express from "express";
-import expressLoader from "./express";
-import databaseConnect from "./connection";
+import expressLoader from "@/loaders/express";
+import databaseConnect from "@/loaders/connection";
 
 export default async (app: express.Application) => {
   await databaseConnect();
