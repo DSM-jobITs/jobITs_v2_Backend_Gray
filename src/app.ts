@@ -1,23 +1,16 @@
-import express, { Request, Response, NextFunction, Application } from "express";
-import morgan from "morgan";
-import cors from "cors";
-import path from "path";
-import * as dotenv from "dotenv";
+import "reflect-metadata";
+import express from "express";
 
-dotenv.config({ path: path.join(__dirname + "../.env") });
+import loader from "./loaders";
+import config from "./config";
+import logger from "./loaders/logger";
 
-const app: Application = express();
+async function startServer() {
+  const app = express();
+  await loader(app);
+  app.listen(config.port, () => {
+    logger.info(`Server listening on ${config.port}`);
+  });
+}
 
-app.use(morgan("dev"));
-app.use(cors());
-
-app.use(express.json());
-app.use(express.urlencoded({ extended: false }));
-
-app.use((err, req: Request, res: Response, next: NextFunction) => {
-  res.status(404).json({ message: err.message });
-});
-
-app.listen(3000, () => {
-  console.log("server on");
-});
+startServer();
