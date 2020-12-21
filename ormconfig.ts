@@ -1,4 +1,5 @@
 import config from "./src/config";
+import { Depart } from "./src/models";
 
 export = {
   type: "mysql",
@@ -9,5 +10,5 @@ export = {
   database: config.mysql.name,
   synchronize: false,
   logging: true,
-  entities: [],
+  entities: [Depart],
 };
