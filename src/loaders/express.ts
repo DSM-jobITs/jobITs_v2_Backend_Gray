@@ -1,7 +1,7 @@
 import * as express from "express";
 import morgan from "morgan";
 import cors from "cors";
-import { ApiNotFoundError } from "../exception";
+import { ApiNotFoundError } from "@/exception";
 
 export default (app: express.Application) => {
   app.use(cors());
