@@ -1,5 +1,5 @@
 import config from "./src/config";
-import { Depart } from "./src/entities";
+import { Depart, Student, Enterprise } from "./src/entities";
 import { ConnectionOptions } from "typeorm";
 
 const connectionOptions: ConnectionOptions = {
@@ -11,7 +11,7 @@ const connectionOptions: ConnectionOptions = {
   database: config.mysql.name,
   synchronize: true,
   logging: true,
-  entities: [Depart],
+  entities: [Depart, Student, Enterprise],
 };
 
 export default connectionOptions;
