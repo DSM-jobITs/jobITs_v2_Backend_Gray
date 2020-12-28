@@ -1,5 +1,5 @@
 import { createConnection } from "typeorm";
-import logger from "@/loaders/logger";
+import logger from "./logger";
 import connectionOptions from "@/../ormconfig";
 
 export default async () => {
