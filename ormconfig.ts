@@ -1,5 +1,5 @@
-import config from "./src/config";
-import { Depart, Student, Enterprise } from "./src/entities";
+import config from "@/config";
+import { Depart, Student, Enterprise } from "@/entities";
 import { ConnectionOptions } from "typeorm";
 
 const connectionOptions: ConnectionOptions = {
