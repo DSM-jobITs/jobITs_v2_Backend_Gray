@@ -1,20 +1,19 @@
 {
   "compilerOptions": {
-    "module": "commonjs",
-    "target": "es2020",
-    "lib": ["ES6"],
     "outDir": "dist",
+    "module": "commonjs",
+    "target": "es2019",
     "esModuleInterop": true,
-    "strictPropertyInitialization": false,
-    "moduleResolution": "Node",
     "sourceMap": true,
-    "baseUrl": "./src",
-    "paths": {
-      "@/*": ["*"]
-    },
     "experimentalDecorators": true,
-    "emitDecoratorMetadata": true
+    "emitDecoratorMetadata": true,
+    "rootDirs": ["src", "test"],
+    "baseUrl": "src",
+    "paths": {
+      "@/test/*": ["../test/*"],
+      "@/*": ["*"]
+    }
   },
-  "include": ["src"],
-  "exclude": ["src/**/*.spec.ts", "src/**/*.test.ts"]
+  "include": ["src", "test"],
+  "exclude": []
 }
