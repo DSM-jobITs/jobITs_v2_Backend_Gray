@@ -13,14 +13,6 @@ export class Student extends ValidationEntity {
   @IsNotEmpty()
   id: string;
 
-  @Column({ nullable: false, length: 50 })
-  @IsNotEmpty()
-  password: string;
-
-  @Column({ nullable: false, length: 5 })
-  @IsNotEmpty()
-  name: string;
-
   @OneToOne((type) => Depart, (depart) => depart.id)
   @JoinColumn({ name: "depart_id" })
   depart: Depart;
