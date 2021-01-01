@@ -1,19 +1,18 @@
-import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
 import { Depart } from "./depart";
 import { ValidationEntity } from "./validation";
-import { IsNotEmpty, Length } from "class-validator";
+import { User } from "./user";
 
 @Entity()
 export class Student extends ValidationEntity {
   @PrimaryColumn({ name: "std_no", type: "char", length: 4 })
   stdNo: string;
 
-  @Column({ nullable: false, length: 15 })
-  @Length(6)
-  @IsNotEmpty()
-  id: string;
-
   @OneToOne((type) => Depart, (depart) => depart.id)
   @JoinColumn({ name: "depart_id" })
   depart: Depart;
+
+  @OneToOne((type) => User, (user) => user.id)
+  @JoinColumn()
+  user: User;
 }
