@@ -16,7 +16,12 @@ export class Recruit extends ValidationEntity {
   @Column({ type: "tinyint", nullable: false, name: "recruit_plan" })
   recruitPlan: boolean;
 
-  @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo)
+  @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
+    cascade: true,
+    eager: true,
+    onUpdate: "CASCADE",
+    onDelete: "CASCADE",
+  })
   @JoinColumn({ name: "ent_no" })
   enterprise: Enterprise;
 }
