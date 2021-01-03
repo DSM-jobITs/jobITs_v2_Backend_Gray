@@ -23,4 +23,10 @@ export class Enterprise extends ValidationEntity {
 
   @Column({ type: "tinyint", nullable: false })
   sector: boolean;
+
+  @Column({ length: 40, nullable: false })
+  address: string;
+
+  @Column({ length: 5, type: "char", nullable: false, name: "zip_code" })
+  zipCode: string;
 }
