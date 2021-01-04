@@ -1,6 +1,7 @@
 import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { Introduction } from "./introduction";
 import { ValidationEntity } from "./validation";
+import { Recruit } from "./recruit";
 
 @Entity()
 export class Enterprise extends ValidationEntity {
@@ -30,6 +31,9 @@ export class Enterprise extends ValidationEntity {
 
   @Column({ length: 5, type: "char", nullable: false, name: "zip_code" })
   zipCode: string;
+
+  @OneToMany((type) => Recruit, (recruit) => recruit.enterprise)
+  recruits!: Recruit[];
 
   @OneToMany((type) => Introduction, (introduction) => introduction.enterprise)
   introductinos!: Introduction[];

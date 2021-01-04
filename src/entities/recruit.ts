@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryColumn, Column, JoinColumn, ManyToOne } from "typeorm";
 import { ValidationEntity } from "./validation";
 import { Enterprise } from "./enterprise";
 
@@ -7,10 +7,10 @@ export class Recruit extends ValidationEntity {
   @PrimaryColumn({ length: 30 })
   id: string;
 
-  @Column({ length: 12, type: "char", nullable: false })
+  @Column({ length: 10, type: "char", nullable: false })
   reception: string;
 
-  @Column({ length: 12, type: "char", nullable: false })
+  @Column({ length: 10, type: "char", nullable: false })
   deadline: string;
 
   @Column({ type: "tinyint", nullable: false, name: "recruit_plan" })
@@ -28,10 +28,10 @@ export class Recruit extends ValidationEntity {
   @Column({ nullable: false })
   period: number;
 
-  @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
+  @ManyToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
   @JoinColumn({ name: "ent_no" })
-  enterprise: Enterprise;
+  enterprise!: Enterprise;
 }
