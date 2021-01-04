@@ -1,7 +1,6 @@
 import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { ValidationEntity } from "./validation";
 import { Enterprise } from "./enterprise";
-import { Min, Max } from "class-validator";
 
 @Entity()
 export class Recruit extends ValidationEntity {
