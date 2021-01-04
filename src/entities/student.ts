@@ -9,8 +9,6 @@ export class Student extends ValidationEntity {
   stdNo: string;
 
   @OneToOne((type) => Depart, (depart) => depart.id, {
-    cascade: true,
-    eager: true,
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
@@ -18,8 +16,6 @@ export class Student extends ValidationEntity {
   depart: Depart;
 
   @OneToOne((type) => User, (user) => user.id, {
-    cascade: true,
-    eager: true,
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
