@@ -10,7 +10,7 @@ export class Enterprise extends ValidationEntity {
   @Column({ length: 30, nullable: false })
   name: string;
 
-  @Column({ length: 12, type: "char", nullable: false })
+  @Column({ length: 13, type: "char", nullable: false })
   phone: string;
 
   @Column({ length: 15, name: "establishment_date", nullable: false })
@@ -22,8 +22,8 @@ export class Enterprise extends ValidationEntity {
   @Column({ length: 255, nullable: false })
   introduce: string;
 
-  @Column({ type: "tinyint", nullable: false })
-  sector: boolean;
+  @Column({ length: 50, nullable: false })
+  sector: string;
 
   @Column({ length: 40, nullable: false })
   address: string;
