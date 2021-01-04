@@ -17,15 +17,11 @@ export class Recruit extends ValidationEntity {
   @Column({ type: "tinyint", nullable: false, name: "recruit_plan" })
   recruitPlan: boolean;
 
-  @Column({ nullable: false, name: "start_time" })
-  @Min(0)
-  @Max(24)
-  startTime: number;
+  @Column({ length: 5, type: "char", nullable: false, name: "start_time" })
+  startTime: string;
 
-  @Column({ nullable: false, name: "end_time" })
-  @Min(0)
-  @Max(24)
-  endTime: number;
+  @Column({ length: 5, type: "char", nullable: false, name: "end_time" })
+  endTime: string;
 
   @Column({ nullable: false })
   salary: number;
