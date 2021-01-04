@@ -17,8 +17,6 @@ export class Recruit extends ValidationEntity {
   recruitPlan: boolean;
 
   @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
-    cascade: true,
-    eager: true,
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
