@@ -16,6 +16,12 @@ export class Recruit extends ValidationEntity {
   @Column({ type: "tinyint", nullable: false, name: "recruit_plan" })
   recruitPlan: boolean;
 
+  @Column({ nullable: false })
+  salary: number;
+
+  @Column({ nullable: false })
+  period: number;
+
   @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
