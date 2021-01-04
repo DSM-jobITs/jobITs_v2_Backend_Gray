@@ -1,4 +1,5 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
+import { Introduction } from "./introduction";
 import { ValidationEntity } from "./validation";
 
 @Entity()
@@ -29,4 +30,7 @@ export class Enterprise extends ValidationEntity {
 
   @Column({ length: 5, type: "char", nullable: false, name: "zip_code" })
   zipCode: string;
+
+  @OneToMany((type) => Introduction, (introduction) => introduction.enterprise)
+  introductinos!: Introduction[];
 }
