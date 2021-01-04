@@ -1,6 +1,7 @@
 import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { ValidationEntity } from "./validation";
 import { Enterprise } from "./enterprise";
+import { Min, Max } from "class-validator";
 
 @Entity()
 export class Recruit extends ValidationEntity {
@@ -15,6 +16,16 @@ export class Recruit extends ValidationEntity {
 
   @Column({ type: "tinyint", nullable: false, name: "recruit_plan" })
   recruitPlan: boolean;
+
+  @Column({ nullable: false, name: "start_time" })
+  @Min(0)
+  @Max(24)
+  startTime: number;
+
+  @Column({ nullable: false, name: "end_time" })
+  @Min(0)
+  @Max(24)
+  endTime: number;
 
   @Column({ nullable: false })
   salary: number;
