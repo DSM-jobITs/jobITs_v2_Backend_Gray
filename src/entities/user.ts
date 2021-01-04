@@ -1,4 +1,4 @@
-import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from "typeorm";
+import { Entity, PrimaryColumn, Column } from "typeorm";
 import { ValidationEntity } from "./validation";
 
 @Entity()
