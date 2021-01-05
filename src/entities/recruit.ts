@@ -28,6 +28,12 @@ export class Recruit extends ValidationEntity {
   @Column({ nullable: false })
   period: number;
 
+  @Column({ type: "tinyint", nullable: false, default: false })
+  expired: boolean;
+
+  @Column({ nullable: true })
+  personnel: number;
+
   @ManyToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
