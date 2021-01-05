@@ -16,7 +16,7 @@ export class Welfare extends ValidationEntity {
   @Column({ type: "tinyint", default: false })
   laptop: boolean;
 
-  @Column()
+  @Column({ nullable: true })
   etc: string;
 
   @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
