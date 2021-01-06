@@ -3,6 +3,7 @@ import { Request, Response, NextFunction } from "express";
 import {
   writeFirstRecruitRequest,
   writeSecondRecruitRequest,
+  writeThirdRecruitRequest,
 } from "@/interfaces";
 import _ from "lodash";
 
@@ -25,6 +26,18 @@ export class RecruitController {
     const id: string = req.params.id;
     await RecruitService.updateSecondRecruit(
       req.body as writeSecondRecruitRequest,
+      id
+    );
+    res.status(200).end();
+  }
+  public static async writeThirdRecruit(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const id: string = req.params.id;
+    await RecruitService.updateThirdRecruit(
+      req.body as writeThirdRecruitRequest,
       id
     );
     res.status(200).end();
