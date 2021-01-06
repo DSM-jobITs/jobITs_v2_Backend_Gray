@@ -20,6 +20,7 @@ const firstRecruitSchema = Joi.object()
 const secondRecruitSchema = Joi.object()
   .keys({
     introduce: Joi.string().length(255).required(),
+    detail: Joi.string().length(255).required(),
   })
   .unknown();
 
