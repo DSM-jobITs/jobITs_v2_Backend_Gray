@@ -1,5 +1,4 @@
 import { Manager } from "@/entities";
-import { writeFirstRecruitRequest } from "@/interfaces";
 import { getRepository } from "typeorm";
 
 export class ManagerRepository {
