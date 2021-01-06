@@ -12,3 +12,8 @@ export interface writeFirstRecruitRequest {
   managerPhone: string;
   managerEmail: string;
 }
+
+export interface writeSecondRecruitRequest {
+  introduce: string;
+  detail: string;
+}
