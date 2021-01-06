@@ -33,7 +33,22 @@ export class RecruitRepository {
     return await getRepository(Recruit)
       .createQueryBuilder("recruit")
       .update(Recruit)
-      .set({ detail })
+      .set({ detail, page: 3 })
+      .where("id = :id", { id })
+      .execute();
+  }
+
+  public static async addThirdPageInfo(
+    startTime: string,
+    endTime: string,
+    salary: number,
+    period: number,
+    id: string
+  ) {
+    return await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .update(Recruit)
+      .set({ startTime, endTime, salary, period })
       .where("id = :id", { id })
       .execute();
   }
