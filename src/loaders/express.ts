@@ -3,7 +3,7 @@ import morgan from "morgan";
 import cors from "cors";
 import { ApiNotFound } from "@/exception";
 import logger from "./logger";
-import routes from "routes";
+import router from "@/routes";
 
 export default (app: express.Application) => {
   app.use(cors());
@@ -11,7 +11,7 @@ export default (app: express.Application) => {
   app.use(express.urlencoded({ extended: false }));
   app.use(morgan("dev"));
 
-  app.use("/", routes);
+  app.use("/", router);
 
   app.use((req, res, next) => {
     next(ApiNotFound);
