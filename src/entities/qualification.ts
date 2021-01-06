@@ -22,11 +22,14 @@ export class Qualification extends ValidationEntity {
   @Max(100)
   grade: number;
 
+  @Column({ length: 30, name: "recruit_id" })
+  recruitId: string;
+
   @OneToOne((type) => Recruit, (recruit) => recruit.id, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
-  @JoinColumn()
+  @JoinColumn({ name: "recruit_id" })
   recruit: Recruit;
 
   @OneToMany((type) => Certificate, (certificate) => certificate.qualification)
