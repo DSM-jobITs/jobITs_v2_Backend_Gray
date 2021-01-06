@@ -31,6 +31,7 @@
     "mysql": "^2.18.1",
     "reflect-metadata": "^0.1.13",
     "typeorm": "^0.2.29",
+    "uuid4": "^2.0.2",
     "winston": "^3.3.3",
     "winston-daily-rotate-file": "^4.5.0"
   },
