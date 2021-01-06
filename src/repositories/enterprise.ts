@@ -1,20 +1,36 @@
 import { Enterprise } from "@/entities";
-import { writeFirstRecruitRequest } from "@/interfaces";
 import { getRepository } from "typeorm";
 
 export class EnterpriseRepository {
   public static async createEnterprise(
-    req: writeFirstRecruitRequest
+    name: string,
+    entNo: string,
+    phone: string,
+    sales: number,
+    sector: string,
+    establishmentDate: string,
+    address: string,
+    zipCode: string
   ): Promise<Enterprise> {
     const enterprise: Enterprise = new Enterprise();
-    enterprise.name = req.name;
-    enterprise.entNo = req.entNo;
-    enterprise.phone = req.phone;
-    enterprise.sales = req.sales;
-    enterprise.sector = req.sector;
-    enterprise.establishmentDate = req.establishmentDate;
-    enterprise.address = req.address;
-    enterprise.zipCode = req.zipCode;
+    enterprise.name = name;
+    enterprise.entNo = entNo;
+    enterprise.phone = phone;
+    enterprise.sales = sales;
+    enterprise.sector = sector;
+    enterprise.establishmentDate = establishmentDate;
+    enterprise.address = address;
+    enterprise.zipCode = zipCode;
     return await getRepository(Enterprise).save(enterprise);
+  }
+
+  public static async addIntroduce(introduce: string, entNo: string) {
+    console.log(1);
+    return await getRepository(Enterprise)
+      .createQueryBuilder("enterprise")
+      .update(Enterprise)
+      .set({ introduce })
+      .where("entNo = :entNo", { entNo })
+      .execute();
   }
 }
