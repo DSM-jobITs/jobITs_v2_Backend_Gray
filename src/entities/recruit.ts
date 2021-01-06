@@ -37,6 +37,9 @@ export class Recruit extends ValidationEntity {
   @Column({ type: "tinyint", nullable: true, default: true })
   writing: boolean;
 
+  @Column({ default: 1 })
+  page: number;
+
   @ManyToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
