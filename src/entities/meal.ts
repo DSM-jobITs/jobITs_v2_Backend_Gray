@@ -1,11 +1,11 @@
 import { Entity, PrimaryColumn, Column, OneToOne, JoinColumn } from "typeorm";
 import { ValidationEntity } from "./validation";
-import { Enterprise } from "./enterprise";
+import { Recruit } from "./recruit";
 
 @Entity()
 export class Meal extends ValidationEntity {
-  @PrimaryColumn({ length: 12, type: "char", name: "ent_no" })
-  entNo: string;
+  @PrimaryColumn({ length: 30, name: "recruit_id" })
+  recruitId: string;
 
   @Column({ type: "tinyint", default: false })
   breakfast: boolean;
@@ -19,10 +19,10 @@ export class Meal extends ValidationEntity {
   @Column({ type: "tinyint", default: false })
   salary: boolean;
 
-  @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
+  @OneToOne((type) => Recruit, (recruit) => recruit.id, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
-  @JoinColumn({ name: "ent_no" })
-  enterprise: Enterprise;
+  @JoinColumn({ name: "recruit_id" })
+  recruit: Recruit;
 }
