@@ -26,4 +26,11 @@ router.post(
   tryCatchMiddleware.Error(RecruitController.writeSecondRecruit)
 );
 
+router.post(
+  "/third/:id",
+  authMiddleware,
+  adminCheckMiddleware,
+  tryCatchMiddleware.Error(RecruitController.writeThirdRecruit)
+);
+
 export default router;
