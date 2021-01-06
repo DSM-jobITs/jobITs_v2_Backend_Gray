@@ -10,6 +10,9 @@ export class Specialty extends ValidationEntity {
   @Column({ length: 20 })
   specialty: string;
 
+  @Column({ length: 30, name: "qualification_id" })
+  qualificationId: string;
+
   @ManyToOne(
     (type) => Qualification,
     (qualification) => qualification.certficates,
