@@ -10,6 +10,9 @@ export class Certificate extends ValidationEntity {
   @Column({ length: 20 })
   certificate: string;
 
+  @Column({ name: "qualification_id", length: 30 })
+  qualificationId: string;
+
   @ManyToOne(
     (type) => Qualification,
     (qualification) => qualification.certficates,
