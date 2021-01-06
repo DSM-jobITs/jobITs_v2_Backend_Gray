@@ -8,28 +8,28 @@ export class Enterprise extends ValidationEntity {
   @PrimaryColumn({ length: 12, type: "char", name: "ent_no" })
   entNo: string;
 
-  @Column({ length: 30, nullable: false })
+  @Column({ length: 30, nullable: true })
   name: string;
 
-  @Column({ length: 13, type: "char", nullable: false })
+  @Column({ length: 13, type: "char", nullable: true })
   phone: string;
 
-  @Column({ length: 15, name: "establishment_date", nullable: false })
+  @Column({ length: 15, name: "establishment_date", nullable: true })
   establishmentDate: string;
 
-  @Column({ type: "float" })
+  @Column({ type: "float", nullable: true })
   sales: number;
 
-  @Column({ length: 255, nullable: false })
+  @Column({ length: 255, nullable: true })
   introduce: string;
 
-  @Column({ length: 50, nullable: false })
+  @Column({ length: 50, nullable: true })
   sector: string;
 
-  @Column({ length: 40, nullable: false })
+  @Column({ length: 40, nullable: true })
   address: string;
 
-  @Column({ length: 5, type: "char", nullable: false, name: "zip_code" })
+  @Column({ length: 5, type: "char", name: "zip_code", nullable: true })
   zipCode: string;
 
   @OneToMany((type) => Recruit, (recruit) => recruit.enterprise)
