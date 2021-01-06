@@ -34,11 +34,17 @@ export class Recruit extends ValidationEntity {
   @Column({ nullable: true })
   personnel: number;
 
+  @Column({ nullable: true })
+  detail: string;
+
   @Column({ type: "tinyint", nullable: true, default: true })
   writing: boolean;
 
   @Column({ default: 1 })
   page: number;
+
+  @Column({ name: "ent_no", length: 12 })
+  entNo: string;
 
   @ManyToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
     onUpdate: "CASCADE",
