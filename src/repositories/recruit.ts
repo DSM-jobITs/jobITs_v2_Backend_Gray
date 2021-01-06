@@ -1,5 +1,5 @@
-import { Recruit } from "@/entities";
-import { mkId } from "@/utils/uuid";
+import { Recruit, Enterprise } from "@/entities";
+import { writeFirstRecruitRequest } from "@/interfaces";
 import { getRepository } from "typeorm";
 
 export class RecruitRepository {
@@ -7,12 +7,18 @@ export class RecruitRepository {
     return await getRepository(Recruit)
       .createQueryBuilder("recruit")
       .where("recruit.writing = :writing", { writing: true })
-      .getOne();
+      .getMany();
   }
 
-  public static async createRecruit() {
+  public static async createRecruit(
+    req: writeFirstRecruitRequest,
+    id: string,
+    enterprise: Enterprise
+  ) {
     const recruit = new Recruit();
-    recruit.id = await mkId();
-    return await getRepository(Recruit).save(recruit);
+    recruit.id = id;
+    recruit.personnel = req.personnel;
+    recruit.enterprise = enterprise;
+    await getRepository(Recruit).save(recruit);
   }
 }
