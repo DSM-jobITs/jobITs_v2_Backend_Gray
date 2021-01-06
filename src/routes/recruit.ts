@@ -5,7 +5,7 @@ import {
   adminCheckMiddleware,
 } from "@/middlewares";
 import validate, { Parameters } from "@/middlewares/validation";
-import { writeFirstRecruit } from "@/controllers";
+import { RecruitController } from "@/controllers";
 import { firstRecruitSchema } from "@/schemas";
 
 const router = Router();
@@ -14,8 +14,16 @@ router.post(
   "/first",
   authMiddleware,
   adminCheckMiddleware,
-  validate({ schema: firstRecruitSchema, parameters: Parameters.BODY }),
-  tryCatchMiddleware.Error(writeFirstRecruit)
+  // validate({ schema: firstRecruitSchema, parameters: Parameters.BODY }),
+  tryCatchMiddleware.Error(RecruitController.writeFirstRecruit)
+);
+
+router.post(
+  "/second/:id",
+  authMiddleware,
+  adminCheckMiddleware,
+  // validate({ schema: firstRecruitSchema, parameters: Parameters.BODY }),
+  tryCatchMiddleware.Error(RecruitController.writeSecondRecruit)
 );
 
 export default router;
