@@ -1,5 +1,4 @@
-import { Recruit } from "@/entities";
-import { UserService, RecruitService } from "@/services";
+import { RecruitService } from "@/services";
 import { Request, Response, NextFunction } from "express";
 import { writeFirstRecruitRequest } from "@/interfaces";
 import _ from "lodash";
