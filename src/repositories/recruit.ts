@@ -25,7 +25,6 @@ export class RecruitRepository {
     recruit.id = id;
     recruit.personnel = personnel;
     recruit.entNo = enterprise.entNo;
-    recruit.page = 2;
     await getRepository(Recruit).save(recruit);
   }
 
@@ -33,7 +32,7 @@ export class RecruitRepository {
     return await getRepository(Recruit)
       .createQueryBuilder("recruit")
       .update(Recruit)
-      .set({ detail, page: 3 })
+      .set({ detail })
       .where("id = :id", { id })
       .execute();
   }
@@ -49,6 +48,15 @@ export class RecruitRepository {
       .createQueryBuilder("recruit")
       .update(Recruit)
       .set({ startTime, endTime, salary, period })
+      .where("id = :id", { id })
+      .execute();
+  }
+
+  public static async addPage(id: string) {
+    await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .update(Recruit)
+      .set({ page: () => "page + 1" })
       .where("id = :id", { id })
       .execute();
   }
