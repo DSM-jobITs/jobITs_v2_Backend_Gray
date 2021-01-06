@@ -41,6 +41,7 @@ export class RecruitService {
       req.managerPhone,
       req.managerEmail
     );
+    await RecruitRepository.addPage(uuid);
     return uuid;
   }
 
@@ -52,6 +53,7 @@ export class RecruitService {
     if (!recruit) throw RecruitNotFound;
     await RecruitRepository.addDetails(req.detail, id);
     await EnterpriseRepository.addIntroduce(req.introduce, recruit.entNo);
+    await RecruitRepository.addPage(id);
   }
 
   public static async updateThirdRecruit(
@@ -101,6 +103,7 @@ export class RecruitService {
       req.labtop,
       req.etc
     );
+    await RecruitRepository.addPage(id);
   }
   public static async getWritingRecruits(): Promise<Array<Recruit>> {
     return await RecruitRepository.getWritingRecruit();
