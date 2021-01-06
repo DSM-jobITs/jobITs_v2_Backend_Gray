@@ -26,7 +26,6 @@ export class RecruitService {
       req.address,
       req.zipCode
     );
-    console.log(enterprise);
     await RecruitRepository.createRecruit(uuid, req.personnel, enterprise);
     await ManagerRepository.createManager(
       req.entNo,

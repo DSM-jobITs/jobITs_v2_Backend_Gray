@@ -25,7 +25,6 @@ export class EnterpriseRepository {
   }
 
   public static async addIntroduce(introduce: string, entNo: string) {
-    console.log(1);
     return await getRepository(Enterprise)
       .createQueryBuilder("enterprise")
       .update(Enterprise)
