@@ -1,8 +1,14 @@
 import { Recruit, Enterprise } from "@/entities";
-import { writeFirstRecruitRequest } from "@/interfaces";
 import { getRepository } from "typeorm";
 
 export class RecruitRepository {
+  public static async findOneById(id: string): Promise<Recruit> {
+    return await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .where("recruit.id = :id", { id })
+      .getOne();
+  }
+
   public static async getWritingRecruit() {
     return await getRepository(Recruit)
       .createQueryBuilder("recruit")
@@ -11,14 +17,24 @@ export class RecruitRepository {
   }
 
   public static async createRecruit(
-    req: writeFirstRecruitRequest,
     id: string,
+    personnel: number,
     enterprise: Enterprise
   ) {
     const recruit = new Recruit();
     recruit.id = id;
-    recruit.personnel = req.personnel;
-    recruit.enterprise = enterprise;
+    recruit.personnel = personnel;
+    recruit.entNo = enterprise.entNo;
+    recruit.page = 2;
     await getRepository(Recruit).save(recruit);
+  }
+
+  public static async addDetails(detail: string, id: string) {
+    return await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .update(Recruit)
+      .set({ detail })
+      .where("id = :id", { id })
+      .execute();
   }
 }
