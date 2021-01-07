@@ -6,3 +6,4 @@ export * from "./certificate";
 export * from "./specialty";
 export * from "./qualification";
 export * from "./meal";
+export * from "./welfare";
