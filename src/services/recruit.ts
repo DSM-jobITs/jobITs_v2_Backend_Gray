@@ -16,8 +16,8 @@ import {
   QualificationRepository,
   CertificateRepository,
   SpecialtyRepository,
+  WelfareRepository,
 } from "@/repositories";
-import { WelfareRepository } from "@/repositories/welfare";
 
 export class RecruitService {
   public static async createRecruit(
