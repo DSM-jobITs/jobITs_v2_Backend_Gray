@@ -14,7 +14,6 @@ router.post(
   "/first",
   authMiddleware,
   adminCheckMiddleware,
-  // validate({ schema: firstRecruitSchema, parameters: Parameters.BODY }),
   tryCatchMiddleware.Error(RecruitController.writeFirstRecruit)
 );
 
@@ -22,7 +21,6 @@ router.post(
   "/second/:id",
   authMiddleware,
   adminCheckMiddleware,
-  // validate({ schema: secondRecruitSchema, parameters: Parameters.BODY }),
   tryCatchMiddleware.Error(RecruitController.writeSecondRecruit)
 );
 
@@ -30,7 +28,6 @@ router.post(
   "/third/:id",
   authMiddleware,
   adminCheckMiddleware,
-  // validate({ schema: thirdRecruitSchema, parameters: Parameters.BODY }),
   tryCatchMiddleware.Error(RecruitController.writeThirdRecruit)
 );
 
