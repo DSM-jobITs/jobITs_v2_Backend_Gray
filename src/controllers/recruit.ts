@@ -42,4 +42,11 @@ export class RecruitController {
     );
     res.status(200).end();
   }
+  public static async writeFourthRecruit(
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) {
+    const id: string = req.params.id;
+  }
 }
