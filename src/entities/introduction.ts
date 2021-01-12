@@ -13,6 +13,9 @@ export class Introduction extends ValidationEntity {
   @Column({ length: 50, name: "file_uuid" })
   fileUuid: string;
 
+  @Column({ length: 12, name: "ent_no" })
+  entNo: string;
+
   @ManyToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
