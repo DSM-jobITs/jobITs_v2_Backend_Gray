@@ -35,3 +35,9 @@ export interface writeThirdRecruitRequest {
   labtop: boolean;
   etc: string;
 }
+
+export interface writeFourthRecruitRequest {
+  recruitPlan: string;
+  reception: string;
+  deadline: string;
+}
