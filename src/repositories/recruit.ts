@@ -60,4 +60,21 @@ export class RecruitRepository {
       .where("id = :id", { id })
       .execute();
   }
+
+  public static async addFinalPageInfo(
+    id: string,
+    recruitPlan: string,
+    reception: string,
+    deadline: string
+  ) {
+    await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .update(Recruit)
+      .set({
+        recruitPlan: (recruitPlan = "true") ? true : false,
+        reception,
+        deadline,
+      })
+      .where("id = :id", { id });
+  }
 }
