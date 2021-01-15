@@ -7,6 +7,7 @@ import {
 import { Recruit, Enterprise } from "@/entities";
 import {
   writeFirstRecruitRequest,
+  writeFourthRecruitRequest,
   writeSecondRecruitRequest,
   writeThirdRecruitRequest,
 } from "@/interfaces";
@@ -107,5 +108,17 @@ export class RecruitService {
   }
   public static async getWritingRecruits(): Promise<Array<Recruit>> {
     return await RecruitRepository.getWritingRecruit();
+  }
+
+  public static async updateFourthRecruit(
+    req: writeFourthRecruitRequest,
+    id: string
+  ) {
+    await RecruitRepository.addFinalPageInfo(
+      id,
+      req.recruitPlan,
+      req.reception,
+      req.deadline
+    );
   }
 }
