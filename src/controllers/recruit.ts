@@ -2,6 +2,7 @@ import { RecruitService } from "@/services";
 import { Request, Response, NextFunction } from "express";
 import {
   writeFirstRecruitRequest,
+  writeFourthRecruitRequest,
   writeSecondRecruitRequest,
   writeThirdRecruitRequest,
 } from "@/interfaces";
@@ -48,5 +49,11 @@ export class RecruitController {
     next: NextFunction
   ) {
     const id: string = req.params.id;
+    await RecruitService.updateFourthRecruit(
+      req.body as writeFourthRecruitRequest,
+      id
+    );
+    console.log(req["files"]);
+    res.status(200).end();
   }
 }
