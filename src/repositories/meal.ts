@@ -2,7 +2,7 @@ import { Meal } from "@/entities";
 import { getRepository } from "typeorm";
 
 export class MealRepository {
-  public static async createMeal(
+  public async createMeal(
     recruitId: string,
     breakfast: boolean,
     lunch: boolean,
