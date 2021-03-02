@@ -2,7 +2,7 @@ import { Manager } from "@/entities";
 import { getRepository } from "typeorm";
 
 export class ManagerRepository {
-  public static async createManager(
+  public async createManager(
     entNo: string,
     managerRank: string,
     managerPhone: string,
