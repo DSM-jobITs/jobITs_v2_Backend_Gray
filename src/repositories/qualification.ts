@@ -2,7 +2,7 @@ import { Qualification } from "@/entities";
 import { getRepository } from "typeorm";
 
 export class QualificationRepository {
-  public static async createQualification(
+  public async createQualification(
     id: string,
     grade: number,
     recruitId: string
