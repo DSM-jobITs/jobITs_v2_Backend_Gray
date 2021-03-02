@@ -2,7 +2,7 @@ import { Enterprise } from "@/entities";
 import { getRepository } from "typeorm";
 
 export class EnterpriseRepository {
-  public static async createEnterprise(
+  public async createEnterprise(
     name: string,
     entNo: string,
     phone: string,
@@ -24,7 +24,7 @@ export class EnterpriseRepository {
     return await getRepository(Enterprise).save(enterprise);
   }
 
-  public static async addIntroduce(introduce: string, entNo: string) {
+  public async addIntroduce(introduce: string, entNo: string) {
     return await getRepository(Enterprise)
       .createQueryBuilder("enterprise")
       .update(Enterprise)
