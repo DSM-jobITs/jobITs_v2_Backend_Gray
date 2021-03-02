@@ -2,7 +2,7 @@ import { Welfare } from "@/entities";
 import { getRepository } from "typeorm";
 
 export class WelfareRepository {
-  public static async createWelfare(
+  public async createWelfare(
     recruitId: string,
     fourMajor: boolean,
     selfDevelop: boolean,
