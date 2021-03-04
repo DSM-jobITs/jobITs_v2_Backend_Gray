@@ -1,6 +1,7 @@
-import { Entity, PrimaryColumn, Column } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
 import { ValidationEntity } from "./validation";
 import { IsNotEmpty, Max, Min } from "class-validator";
+import { Student } from "./student";
 
 @Entity()
 export class Depart extends ValidationEntity {
@@ -12,4 +13,7 @@ export class Depart extends ValidationEntity {
   @Column({ nullable: false, length: 20 })
   @IsNotEmpty()
   dept: string;
+
+  @OneToMany(() => Student, (student) => student.depart)
+  students: Student[];
 }
