@@ -1,4 +1,10 @@
-import { Entity, PrimaryColumn, OneToOne, JoinColumn } from "typeorm";
+import {
+  Entity,
+  PrimaryColumn,
+  OneToOne,
+  JoinColumn,
+  ManyToOne,
+} from "typeorm";
 import { Depart } from "./depart";
 import { ValidationEntity } from "./validation";
 import { User } from "./user";
@@ -8,7 +14,7 @@ export class Student extends ValidationEntity {
   @PrimaryColumn({ name: "std_no", type: "char", length: 4 })
   stdNo: string;
 
-  @OneToOne((type) => Depart, (depart) => depart.id, {
+  @ManyToOne((type) => Depart, (depart) => depart.id, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
@@ -19,6 +25,6 @@ export class Student extends ValidationEntity {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
-  @JoinColumn()
+  @JoinColumn({ name: "user_id" })
   user: User;
 }
