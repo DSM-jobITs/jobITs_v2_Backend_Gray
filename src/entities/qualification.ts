@@ -14,8 +14,8 @@ import { Specialty } from "./specialty";
 
 @Entity()
 export class Qualification extends ValidationEntity {
-  @PrimaryColumn({ length: 30 })
-  id: string;
+  @PrimaryColumn({ name: "qualification_id", length: 30 })
+  qualificationId: string;
 
   @Column({ nullable: false })
   @Min(1)
@@ -25,7 +25,7 @@ export class Qualification extends ValidationEntity {
   @Column({ length: 30, name: "recruit_id" })
   recruitId: string;
 
-  @OneToOne((type) => Recruit, (recruit) => recruit.id, {
+  @OneToOne((type) => Recruit, (recruit) => recruit.recruitId, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
