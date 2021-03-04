@@ -19,7 +19,7 @@ export class Welfare extends ValidationEntity {
   @Column({ nullable: true })
   etc: string;
 
-  @OneToOne((type) => Recruit, (recruit) => recruit.id, {
+  @OneToOne((type) => Recruit, (recruit) => recruit.recruitId, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
