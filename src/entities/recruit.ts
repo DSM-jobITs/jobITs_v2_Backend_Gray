@@ -4,8 +4,8 @@ import { Enterprise } from "./enterprise";
 
 @Entity()
 export class Recruit extends ValidationEntity {
-  @PrimaryColumn({ length: 30 })
-  id: string;
+  @PrimaryColumn({ name: "recruit_id", length: 30 })
+  recruitId: string;
 
   @Column({ length: 10, type: "char", nullable: true })
   reception: string;
@@ -36,12 +36,6 @@ export class Recruit extends ValidationEntity {
 
   @Column({ nullable: true })
   detail: string;
-
-  @Column({ type: "tinyint", nullable: true, default: true })
-  writing: boolean;
-
-  @Column({ default: 1 })
-  page: number;
 
   @Column({ name: "ent_no", length: 12 })
   entNo: string;
