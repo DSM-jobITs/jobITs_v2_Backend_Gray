@@ -1,59 +1,119 @@
 import { RecruitService } from "@/services";
 import { Request, Response, NextFunction } from "express";
-import {
-  writeFirstRecruitRequest,
-  writeFourthRecruitRequest,
-  writeSecondRecruitRequest,
-  writeThirdRecruitRequest,
-} from "@/interfaces";
 import _ from "lodash";
+import {
+  CertificateRepository,
+  EnterpriseRepository,
+  ManagerRepository,
+  MealRepository,
+  QualificationRepository,
+  RecruitRepository,
+  SpecialtyRepository,
+  WelfareRepository,
+} from "@/repositories";
+import { getCustomRepository } from "typeorm";
+import { IntroductionRepository } from "@/repositories/introuction";
+import { EnterpriseService } from "@/services/enterprise";
+import { CertificateService } from "@/services/certificate";
+import { IntroductionService } from "@/services/introduction";
+import { ManagerService } from "@/services/manager";
+import { MealService } from "@/services/meal";
+import { QualificationService } from "@/services/qualification";
+import { SpecialtyService } from "@/services/specialty";
+import { WelfareService } from "@/services/welfare";
+import {
+  CertificateInsertType,
+  EnterpriseInsertType,
+  ManagerInsertType,
+  MealInsertType,
+  QualificationInsertType,
+  RecruitInsertType,
+  WelfareInsertType,
+} from "@/interfaces";
+import { mkId } from "@/utils";
 
 export class RecruitController {
-  public static async writeFirstRecruit(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    const id: string = await RecruitService.createRecruit(
-      req.body as writeFirstRecruitRequest
+  private recruitRepository: RecruitRepository = getCustomRepository(
+    RecruitRepository
+  );
+  private enterpriseRepository: EnterpriseRepository = getCustomRepository(
+    EnterpriseRepository
+  );
+  private certificateRepsitory: CertificateRepository = getCustomRepository(
+    CertificateRepository
+  );
+  private introductionRepository: IntroductionRepository = getCustomRepository(
+    IntroductionRepository
+  );
+  private managerRepository: ManagerRepository = getCustomRepository(
+    ManagerRepository
+  );
+  private mealRepository: MealRepository = getCustomRepository(MealRepository);
+  private qualificationRepository: QualificationRepository = getCustomRepository(
+    QualificationRepository
+  );
+  private specialtyRepository: SpecialtyRepository = getCustomRepository(
+    SpecialtyRepository
+  );
+  private welfareRepository: WelfareRepository = getCustomRepository(
+    WelfareRepository
+  );
+
+  private recruitService: RecruitService = new RecruitService(
+    this.recruitRepository
+  );
+  private enterpriseService: EnterpriseService = new EnterpriseService(
+    this.enterpriseRepository
+  );
+  private certificateService: CertificateService = new CertificateService(
+    this.certificateRepsitory
+  );
+  private introductionService: IntroductionService = new IntroductionService(
+    this.introductionRepository
+  );
+  private managerService: ManagerService = new ManagerService(
+    this.managerRepository
+  );
+  private mealService: MealService = new MealService(this.mealRepository);
+  private qualificationService: QualificationService = new QualificationService(
+    this.qualificationRepository
+  );
+  private specialtyService: SpecialtyService = new SpecialtyService(
+    this.specialtyRepository
+  );
+  private welfareService: WelfareService = new WelfareService(
+    this.welfareRepository
+  );
+
+  public async writeRecruit(req: Request, res: Response, next: NextFunction) {
+    const recruitId: string = await mkId();
+    const qualificationId: string = await mkId();
+    Object.assign(req.body, { recruitId, qualificationId });
+    await this.enterpriseService.createEnterprise(
+      req.body as EnterpriseInsertType
     );
-    res.status(200).json({ id });
-  }
-  public static async writeSecondRecruit(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    const id: string = req.params.id;
-    await RecruitService.updateSecondRecruit(
-      req.body as writeSecondRecruitRequest,
-      id
+    await this.recruitService.createRecruit(req.body as RecruitInsertType);
+    await this.qualificationService.createQualification(
+      req.body as QualificationInsertType
     );
-    res.status(200).end();
-  }
-  public static async writeThirdRecruit(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    const id: string = req.params.id;
-    await RecruitService.updateThirdRecruit(
-      req.body as writeThirdRecruitRequest,
-      id
-    );
-    res.status(200).end();
-  }
-  public static async writeFourthRecruit(
-    req: Request,
-    res: Response,
-    next: NextFunction
-  ) {
-    const id: string = req.params.id;
-    await RecruitService.updateFourthRecruit(
-      req.body as writeFourthRecruitRequest,
-      id
-    );
-    console.log(req["files"]);
-    res.status(200).end();
+    await this.welfareService.createWelfare(req.body as WelfareInsertType);
+    await this.mealService.createMeal(req.body as MealInsertType);
+    await this.managerService.createManager(req.body as ManagerInsertType);
+    for (let certificate of req.body.certificates) {
+      const certificateId: string = await mkId();
+      await this.certificateService.createCertificate({
+        qualificationId,
+        certificateId,
+        certificate,
+      });
+    }
+    for (let specialty of req.body.specialties) {
+      const specialtyId: string = await mkId();
+      await this.specialtyService.createSpecialty({
+        qualificationId,
+        specialtyId,
+        specialty,
+      });
+    }
   }
 }
