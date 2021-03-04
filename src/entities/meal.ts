@@ -19,7 +19,7 @@ export class Meal extends ValidationEntity {
   @Column({ type: "tinyint", default: false })
   salary: boolean;
 
-  @OneToOne((type) => Recruit, (recruit) => recruit.id, {
+  @OneToOne((type) => Recruit, (recruit) => recruit.recruitId, {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
