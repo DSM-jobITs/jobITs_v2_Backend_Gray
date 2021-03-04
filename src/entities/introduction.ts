@@ -4,8 +4,8 @@ import { ValidationEntity } from "./validation";
 
 @Entity()
 export class Introduction extends ValidationEntity {
-  @PrimaryColumn({ length: 30 })
-  id: string;
+  @PrimaryColumn({ name: "introduction_id", length: 30 })
+  introductionId: string;
 
   @Column({ name: "original_name" })
   originalName: string;
