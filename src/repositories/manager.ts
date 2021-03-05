@@ -1,18 +1,14 @@
 import { Manager } from "@/entities";
-import { getRepository } from "typeorm";
+import { ManagerInsertType } from "@/interfaces";
+import { EntityRepository, getRepository } from "typeorm";
 
+@EntityRepository(Manager)
 export class ManagerRepository {
-  public async createManager(
-    entNo: string,
-    managerRank: string,
-    managerPhone: string,
-    managerEmail: string
-  ) {
-    const manager = new Manager();
-    manager.entNo = entNo;
-    manager.rank = managerRank;
-    manager.phone = managerPhone;
-    manager.email = managerEmail;
-    await getRepository(Manager).save(manager);
+  public async createManager(insertRequest: ManagerInsertType) {
+    await getRepository(Manager)
+      .createQueryBuilder("manager")
+      .insert()
+      .into(Manager)
+      .values(insertRequest);
   }
 }
