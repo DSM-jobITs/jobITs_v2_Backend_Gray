@@ -1,20 +1,14 @@
 import { Meal } from "@/entities";
-import { getRepository } from "typeorm";
+import { MealInsertType } from "@/interfaces";
+import { EntityRepository, getRepository } from "typeorm";
 
+@EntityRepository(Meal)
 export class MealRepository {
-  public async createMeal(
-    recruitId: string,
-    breakfast: boolean,
-    lunch: boolean,
-    dinner: boolean,
-    mealSalary: boolean
-  ) {
-    const meal = new Meal();
-    meal.recruitId = recruitId;
-    meal.breakfast = breakfast;
-    meal.lunch = lunch;
-    meal.dinner = dinner;
-    meal.salary = mealSalary;
-    await getRepository(Meal).save(meal);
+  public async createMeal(insertRequest: MealInsertType) {
+    await getRepository(Meal)
+      .createQueryBuilder("qualification")
+      .insert()
+      .into(Meal)
+      .values(insertRequest);
   }
 }
