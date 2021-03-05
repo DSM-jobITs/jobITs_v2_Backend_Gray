@@ -1,43 +1,26 @@
 import { Router } from "express";
+import validate from "@/middlewares/validation";
 import {
   authMiddleware,
   tryCatchMiddleware,
   adminCheckMiddleware,
+  Parameters,
 } from "@/middlewares";
-import validate, { Parameters } from "@/middlewares/validation";
 import { RecruitController } from "@/controllers";
-import { firstRecruitSchema, thirdRecruitSchema } from "@/schemas";
-import { uploadMiddleware } from "@/middlewares/upload";
+import { writeRecruitSchema } from "@/schemas";
 
 const router = Router();
 
-router.post(
-  "/first",
-  authMiddleware,
-  adminCheckMiddleware,
-  tryCatchMiddleware.Error(RecruitController.writeFirstRecruit)
-);
+export default (app: Router) => {
+  const recruitController: RecruitController = new RecruitController();
 
-router.post(
-  "/second/:id",
-  authMiddleware,
-  adminCheckMiddleware,
-  tryCatchMiddleware.Error(RecruitController.writeSecondRecruit)
-);
+  app.use("/recruit", router);
 
-router.post(
-  "/third/:id",
-  authMiddleware,
-  adminCheckMiddleware,
-  tryCatchMiddleware.Error(RecruitController.writeThirdRecruit)
-);
-
-router.post(
-  "/fourth/:id",
-  authMiddleware,
-  adminCheckMiddleware,
-  //uploadMiddleware.array("file", 2),
-  tryCatchMiddleware.Error(RecruitController.writeThirdRecruit)
-);
-
-export default router;
+  router.post(
+    "/",
+    authMiddleware,
+    adminCheckMiddleware,
+    validate({ schema: writeRecruitSchema, parameters: Parameters.BODY }),
+    tryCatchMiddleware.Error(recruitController.writeRecruit)
+  );
+};
