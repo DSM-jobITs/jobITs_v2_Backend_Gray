@@ -1,6 +1,5 @@
 import { RecruitService } from "@/services";
 import { Request, Response, NextFunction } from "express";
-import _ from "lodash";
 import {
   CertificateRepository,
   EnterpriseRepository,
@@ -12,17 +11,14 @@ import {
   WelfareRepository,
 } from "@/repositories";
 import { getCustomRepository } from "typeorm";
-import { IntroductionRepository } from "@/repositories/introuction";
 import { EnterpriseService } from "@/services/enterprise";
 import { CertificateService } from "@/services/certificate";
-import { IntroductionService } from "@/services/introduction";
 import { ManagerService } from "@/services/manager";
 import { MealService } from "@/services/meal";
 import { QualificationService } from "@/services/qualification";
 import { SpecialtyService } from "@/services/specialty";
 import { WelfareService } from "@/services/welfare";
 import {
-  CertificateInsertType,
   EnterpriseInsertType,
   ManagerInsertType,
   MealInsertType,
@@ -41,9 +37,6 @@ export class RecruitController {
   );
   private certificateRepsitory: CertificateRepository = getCustomRepository(
     CertificateRepository
-  );
-  private introductionRepository: IntroductionRepository = getCustomRepository(
-    IntroductionRepository
   );
   private managerRepository: ManagerRepository = getCustomRepository(
     ManagerRepository
@@ -67,9 +60,6 @@ export class RecruitController {
   );
   private certificateService: CertificateService = new CertificateService(
     this.certificateRepsitory
-  );
-  private introductionService: IntroductionService = new IntroductionService(
-    this.introductionRepository
   );
   private managerService: ManagerService = new ManagerService(
     this.managerRepository
@@ -115,5 +105,6 @@ export class RecruitController {
         specialty,
       });
     }
+    res.status(201).end();
   }
 }
