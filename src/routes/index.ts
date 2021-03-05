@@ -1,8 +1,10 @@
 import { Router } from "express";
 import recruit from "./recruit";
 
-const router = Router();
+export default () => {
+  const app = Router();
 
-router.use("/recruit", recruit);
+  recruit(app);
 
-export default router;
+  return app;
+};
