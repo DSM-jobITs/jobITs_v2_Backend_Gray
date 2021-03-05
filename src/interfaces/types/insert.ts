@@ -10,14 +10,29 @@ export interface EnterpriseInsertType {
   introduce: string;
 }
 
+export interface RecruitInsertType {
+  recruitId: string;
+  reception: string;
+  deadline: string;
+  recruitPlan: boolean;
+  startTime: string;
+  endTime: string;
+  salary: number;
+  period: number;
+  expired: boolean;
+  personnel: number;
+  detail: string;
+  entNo: string;
+}
+
 export interface CertificateInsertType {
-  id: string;
+  certificateId: string;
   certificate: string;
   qualificationId: string;
 }
 
 export interface IntroductionInsertType {
-  id: string;
+  indtroductionId: string;
   originalName: string;
   fileUuid: string;
   entNo: string;
@@ -39,13 +54,13 @@ export interface MealInsertType {
 }
 
 export interface QualificationInsertType {
-  id: string;
+  qualificationId: string;
   grade: number;
   recruitId: string;
 }
 
 export interface SpecialtyInsertType {
-  id: string;
+  specialtyId: string;
   specialty: string;
   qualificationId: string;
 }
