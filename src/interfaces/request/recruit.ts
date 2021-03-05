@@ -1,5 +1,4 @@
-export interface writeFirstRecruitRequest {
-  personnel: number;
+export interface writeRecruitRequest {
   name: string;
   entNo: string;
   phone: string;
@@ -7,18 +6,13 @@ export interface writeFirstRecruitRequest {
   sector: string;
   establishmentDate: string;
   address: string;
+  personnel: number;
   zipCode: string;
   managerRank: string;
   managerPhone: string;
   managerEmail: string;
-}
-
-export interface writeSecondRecruitRequest {
   introduce: string;
   detail: string;
-}
-
-export interface writeThirdRecruitRequest {
   certificates: Array<string>;
   grade: number;
   specialties: Array<string>;
@@ -34,9 +28,6 @@ export interface writeThirdRecruitRequest {
   selfDevelop: boolean;
   labtop: boolean;
   etc: string;
-}
-
-export interface writeFourthRecruitRequest {
   recruitPlan: string;
   reception: string;
   deadline: string;
