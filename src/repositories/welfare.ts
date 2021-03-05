@@ -1,20 +1,14 @@
 import { Welfare } from "@/entities";
-import { getRepository } from "typeorm";
+import { WelfareInsertType } from "@/interfaces";
+import { EntityRepository, getRepository } from "typeorm";
 
+@EntityRepository(Welfare)
 export class WelfareRepository {
-  public async createWelfare(
-    recruitId: string,
-    fourMajor: boolean,
-    selfDevelop: boolean,
-    labtop: boolean,
-    etc: string
-  ) {
-    const welfare = new Welfare();
-    welfare.recruitId = recruitId;
-    welfare.fourMajor = fourMajor;
-    welfare.selfDevelop = selfDevelop;
-    welfare.laptop = labtop;
-    welfare.etc = etc;
-    await getRepository(Welfare).save(welfare);
+  public async createWelfare(insertRequest: WelfareInsertType) {
+    await getRepository(Welfare)
+      .createQueryBuilder("welfare")
+      .insert()
+      .into(Welfare)
+      .values(insertRequest);
   }
 }
