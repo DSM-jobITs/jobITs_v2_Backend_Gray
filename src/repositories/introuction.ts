@@ -1,18 +1,14 @@
 import { Introduction } from "@/entities";
-import { getRepository } from "typeorm";
+import { IntroductionInsertType } from "@/interfaces";
+import { EntityRepository, getRepository } from "typeorm";
 
+@EntityRepository(Introduction)
 export class IntroductionRepository {
-  public static async creaetIntroduction(
-    id: string,
-    originalName: string,
-    fileUuid: string,
-    entNo: string
-  ) {
-    const introduction: Introduction = new Introduction();
-    introduction.id = id;
-    introduction.originalName = originalName;
-    introduction.fileUuid = fileUuid;
-    introduction.entNo = entNo;
-    await getRepository(Introduction).save(introduction);
+  public async creaetIntroduction(insertRequest: IntroductionInsertType) {
+    await getRepository(Introduction)
+      .createQueryBuilder("introduction")
+      .insert()
+      .into(Introduction)
+      .values(insertRequest);
   }
 }
