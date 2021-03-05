@@ -1,27 +1,15 @@
 import { Enterprise } from "@/entities";
-import { getRepository } from "typeorm";
+import { EnterpriseInsertType } from "@/interfaces";
+import { EntityRepository, getRepository } from "typeorm";
 
+@EntityRepository(Enterprise)
 export class EnterpriseRepository {
-  public async createEnterprise(
-    name: string,
-    entNo: string,
-    phone: string,
-    sales: number,
-    sector: string,
-    establishmentDate: string,
-    address: string,
-    zipCode: string
-  ): Promise<Enterprise> {
-    const enterprise: Enterprise = new Enterprise();
-    enterprise.name = name;
-    enterprise.entNo = entNo;
-    enterprise.phone = phone;
-    enterprise.sales = sales;
-    enterprise.sector = sector;
-    enterprise.establishmentDate = establishmentDate;
-    enterprise.address = address;
-    enterprise.zipCode = zipCode;
-    return await getRepository(Enterprise).save(enterprise);
+  public async createEnterprise(insertRequest: EnterpriseInsertType) {
+    await getRepository(Enterprise)
+      .createQueryBuilder("enterprise")
+      .insert()
+      .into(Enterprise)
+      .values(insertRequest);
   }
 
   public async addIntroduce(introduce: string, entNo: string) {
