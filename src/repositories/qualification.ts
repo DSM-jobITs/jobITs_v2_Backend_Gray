@@ -1,16 +1,14 @@
 import { Qualification } from "@/entities";
-import { getRepository } from "typeorm";
+import { QualificationInsertType } from "@/interfaces";
+import { EntityRepository, getRepository } from "typeorm";
 
+@EntityRepository(Qualification)
 export class QualificationRepository {
-  public async createQualification(
-    id: string,
-    grade: number,
-    recruitId: string
-  ) {
-    const qualification = new Qualification();
-    qualification.id = id;
-    qualification.grade = grade;
-    qualification.recruitId = recruitId;
-    await getRepository(Qualification).save(qualification);
+  public async createQualification(insertRequest: QualificationInsertType) {
+    await getRepository(Qualification)
+      .createQueryBuilder("qualification")
+      .insert()
+      .into(Qualification)
+      .values(insertRequest);
   }
 }
