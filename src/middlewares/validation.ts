@@ -17,9 +17,10 @@ export default ({
   parameters: Parameters;
 }) => async (req: Request, res: Response, next: NextFunction) => {
   try {
-    await schema.validateAsync({ schema, value: req[parameters] });
+    await schema.validateAsync(req[parameters]);
     next();
   } catch (e) {
+    console.log(e);
     next(BadRequest);
   }
 };
