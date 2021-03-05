@@ -11,7 +11,7 @@ export default (app: express.Application) => {
   app.use(express.urlencoded({ extended: false }));
   app.use(morgan("dev"));
 
-  app.use("/", router);
+  app.use("/", router());
 
   app.use((req, res, next) => {
     next(ApiNotFound);
