@@ -9,6 +9,7 @@ export class MealRepository {
       .createQueryBuilder("qualification")
       .insert()
       .into(Meal)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 }
