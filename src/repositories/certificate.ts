@@ -9,6 +9,7 @@ export class CertificateRepository {
       .createQueryBuilder("enterprise")
       .insert()
       .into(Certificate)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 }
