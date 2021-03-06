@@ -6,6 +6,7 @@ export interface EnterpriseInsertType {
   sector: string;
   establishmentDate: string;
   address: string;
+  workers: number;
   zipCode: string;
   introduce: string;
 }
@@ -32,7 +33,7 @@ export interface CertificateInsertType {
 }
 
 export interface IntroductionInsertType {
-  indtroductionId: string;
+  introductionId: string;
   originalName: string;
   fileUuid: string;
   entNo: string;
