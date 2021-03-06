@@ -9,6 +9,7 @@ export class WelfareRepository {
       .createQueryBuilder("welfare")
       .insert()
       .into(Welfare)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 }
