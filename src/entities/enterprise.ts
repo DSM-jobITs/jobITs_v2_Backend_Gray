@@ -32,6 +32,9 @@ export class Enterprise extends ValidationEntity {
   @Column({ length: 5, type: "char", name: "zip_code", nullable: true })
   zipCode: string;
 
+  @Column({ nullable: true })
+  workers: number;
+
   @OneToMany((type) => Recruit, (recruit) => recruit.enterprise)
   recruits!: Recruit[];
 
