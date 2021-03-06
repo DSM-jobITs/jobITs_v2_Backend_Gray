@@ -16,6 +16,7 @@ export class RecruitRepository {
       .createQueryBuilder("recruit")
       .insert()
       .into(Recruit)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 }
