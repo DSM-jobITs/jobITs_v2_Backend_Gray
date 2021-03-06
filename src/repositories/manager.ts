@@ -9,6 +9,7 @@ export class ManagerRepository {
       .createQueryBuilder("manager")
       .insert()
       .into(Manager)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 }
