@@ -9,6 +9,7 @@ export class SpecialtyRepository {
       .createQueryBuilder("qualification")
       .insert()
       .into(Specialty)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 }
