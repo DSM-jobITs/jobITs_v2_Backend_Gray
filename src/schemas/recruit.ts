@@ -9,13 +9,14 @@ const writeRecruitSchema = Joi.object()
     sales: Joi.number(),
     sector: Joi.string().required(),
     establishmentDate: Joi.string().isoDate().required(),
+    workers: Joi.number(),
     address: Joi.string().required(),
-    zipCode: Joi.string().length(6).required(),
+    zipCode: Joi.string().length(5).required(),
     managerRank: Joi.string().required(),
-    managerPhone: Joi.string().length(14).required(),
+    managerPhone: Joi.string().length(13).required(),
     managerEmail: Joi.string().email().required(),
-    introduce: Joi.string().length(255).required(),
-    detail: Joi.string().length(255).required(),
+    introduce: Joi.string().max(255).required(),
+    detail: Joi.string().max(255).required(),
     certificates: Joi.array().items(Joi.string()),
     grade: Joi.number().min(1).max(100).required(),
     specialties: Joi.array().items(Joi.string()),
@@ -38,7 +39,6 @@ const writeRecruitSchema = Joi.object()
     recruitPlan: Joi.boolean().required(),
     reception: Joi.string().isoDate().required(),
     deadline: Joi.string().isoDate().required(),
-    introductions: Joi.array(),
   })
   .unknown();
 
