@@ -9,7 +9,8 @@ export class EnterpriseRepository {
       .createQueryBuilder("enterprise")
       .insert()
       .into(Enterprise)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 
   public async addIntroduce(introduce: string, entNo: string) {
