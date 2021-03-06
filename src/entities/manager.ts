@@ -8,16 +8,16 @@ export class Manager extends ValidationEntity {
   @PrimaryColumn({ length: 12, type: "char", name: "ent_no" })
   entNo: string;
 
-  @Column({ length: 20, nullable: false })
-  rank: string;
+  @Column({ length: 20, name: "manager_rank", nullable: false })
+  managerRank: string;
 
-  @Column({ length: 14, type: "char", nullable: false })
+  @Column({ length: 14, type: "char", name: "manager_phone", nullable: false })
   @IsMobilePhone("ko-KR")
-  phone: string;
+  managerPhone: string;
 
-  @Column({ length: 30, nullable: false })
+  @Column({ length: 30, name: "manager_email", nullable: false })
   @IsEmail()
-  email: string;
+  managerEmail: string;
 
   @OneToOne((type) => Enterprise, (enterprise) => enterprise.entNo, {
     onUpdate: "CASCADE",
