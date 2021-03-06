@@ -9,6 +9,7 @@ export class IntroductionRepository {
       .createQueryBuilder("introduction")
       .insert()
       .into(Introduction)
-      .values(insertRequest);
+      .values(insertRequest)
+      .execute();
   }
 }
