@@ -1,7 +1,7 @@
 import { verify } from "jsonwebtoken";
 import { Request, Response, NextFunction } from "express";
 import config from "@/config";
-import { TokenRequired } from "@/exception";
+import { InvalidToken, TokenRequired } from "@/exception";
 
 export const authMiddleware = (
   req: Request,
@@ -12,7 +12,7 @@ export const authMiddleware = (
   if (!token) next(TokenRequired);
   const bearer: string = token.split("Bearer ")[1];
   verify(bearer, config.secretKey, (err, decoded) => {
-    if (err) res.status(403).json({ message: err.message });
+    if (err) next(InvalidToken);
     req["decoded"] = decoded;
     next();
   });
