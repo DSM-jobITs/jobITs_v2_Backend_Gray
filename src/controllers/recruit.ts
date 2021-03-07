@@ -27,6 +27,8 @@ import {
   WelfareInsertType,
 } from "@/interfaces";
 import { mkId } from "@/utils";
+import { IntroductionRepository } from "@/repositories/introuction";
+import { IntroductionService } from "@/services/introduction";
 
 export class RecruitController {
   private recruitRepository: RecruitRepository = getCustomRepository(
@@ -44,6 +46,9 @@ export class RecruitController {
   private mealRepository: MealRepository = getCustomRepository(MealRepository);
   private qualificationRepository: QualificationRepository = getCustomRepository(
     QualificationRepository
+  );
+  private introductionRepository: IntroductionRepository = getCustomRepository(
+    IntroductionRepository
   );
   private specialtyRepository: SpecialtyRepository = getCustomRepository(
     SpecialtyRepository
@@ -68,6 +73,9 @@ export class RecruitController {
   private qualificationService: QualificationService = new QualificationService(
     this.qualificationRepository
   );
+  private introductionService: IntroductionService = new IntroductionService(
+    this.introductionRepository
+  );
   private specialtyService: SpecialtyService = new SpecialtyService(
     this.specialtyRepository
   );
@@ -75,7 +83,11 @@ export class RecruitController {
     this.welfareRepository
   );
 
-  public async writeRecruit(req: Request, res: Response, next: NextFunction) {
+  public writeRecruitRequest = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
     const recruitId: string = await mkId();
     const qualificationId: string = await mkId();
     Object.assign(req.body, { recruitId, qualificationId });
@@ -106,5 +118,24 @@ export class RecruitController {
       });
     }
     res.status(201).end();
-  }
+  };
+
+  public uploadIntroductionFiles = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const files = req["files"];
+    const entNo: string = req.params.no;
+    for (let i = 0; i < files.length; i++) {
+      const introductionId: string = await mkId();
+      this.introductionService.createIntroduction({
+        introductionId,
+        originalName: files[i]["originalname"],
+        fileUuid: files[i]["key"],
+        entNo,
+      });
+    }
+    res.status(201).end();
+  };
 }
