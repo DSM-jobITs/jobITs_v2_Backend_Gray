@@ -1,16 +1,21 @@
 import { Enterprise } from "@/entities";
+import { AlreadyExistsData } from "@/exception";
 import { EnterpriseInsertType } from "@/interfaces";
 import { EntityRepository, getRepository } from "typeorm";
 
 @EntityRepository(Enterprise)
 export class EnterpriseRepository {
   public async createEnterprise(insertRequest: EnterpriseInsertType) {
-    await getRepository(Enterprise)
-      .createQueryBuilder("enterprise")
-      .insert()
-      .into(Enterprise)
-      .values(insertRequest)
-      .execute();
+    try {
+      await getRepository(Enterprise)
+        .createQueryBuilder("enterprise")
+        .insert()
+        .into(Enterprise)
+        .values(insertRequest)
+        .execute();
+    } catch (e) {
+      throw AlreadyExistsData;
+    }
   }
 
   public async addIntroduce(introduce: string, entNo: string) {
