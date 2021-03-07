@@ -1,4 +1,5 @@
 import { Recruit } from "@/entities";
+import { AlreadyExistsData } from "@/exception";
 import { RecruitInsertType } from "@/interfaces";
 import { EntityRepository, getRepository } from "typeorm";
 
@@ -12,11 +13,15 @@ export class RecruitRepository {
   }
 
   public async createRecruit(insertRequest: RecruitInsertType) {
-    await getRepository(Recruit)
-      .createQueryBuilder("recruit")
-      .insert()
-      .into(Recruit)
-      .values(insertRequest)
-      .execute();
+    try {
+      await getRepository(Recruit)
+        .createQueryBuilder("recruit")
+        .insert()
+        .into(Recruit)
+        .values(insertRequest)
+        .execute();
+    } catch (e) {
+      throw AlreadyExistsData;
+    }
   }
 }
