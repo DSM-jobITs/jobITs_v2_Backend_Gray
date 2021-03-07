@@ -11,4 +11,10 @@ export default {
     name: process.env.DB_NAME,
   },
   secretKey: process.env.JWT_SECRET,
+  s3: {
+    name: process.env.S3_NAME,
+    access: process.env.S3_ACCESS,
+    secret: process.env.S3_SECRET,
+    region: process.env.S3_REGION,
+  },
 };
