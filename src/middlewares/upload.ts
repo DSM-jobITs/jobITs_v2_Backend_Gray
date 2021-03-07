@@ -13,7 +13,7 @@ const s3 = new aws.S3({
 export const uploadMiddleware = multer({
   storage: multerS3({
     s3: s3,
-    bucket: config.s3.region,
+    bucket: config.s3.name,
     key: (req, file, cb) => {
       const extention = path.extname(file.originalname);
       cb(null, Date.now().toString() + extention);
