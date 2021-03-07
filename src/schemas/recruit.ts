@@ -9,7 +9,7 @@ export const writeRecruitSchema = Joi.object()
     sales: Joi.number(),
     sector: Joi.string().required(),
     establishmentDate: Joi.string().isoDate().required(),
-    workers: Joi.number(),
+    workers: Joi.number().required(),
     address: Joi.string().required(),
     zipCode: Joi.string().length(5).required(),
     managerRank: Joi.string().required(),
