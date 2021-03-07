@@ -8,7 +8,7 @@ export class Enterprise extends ValidationEntity {
   @PrimaryColumn({ length: 12, type: "char", name: "ent_no" })
   entNo: string;
 
-  @Column({ length: 30, nullable: true })
+  @Column({ length: 30, nullable: false })
   name: string;
 
   @Column({ length: 13, type: "char", nullable: true })
