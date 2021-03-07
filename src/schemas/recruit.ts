@@ -1,6 +1,6 @@
 import Joi from "joi";
 
-const writeRecruitSchema = Joi.object()
+export const writeRecruitSchema = Joi.object()
   .keys({
     personnel: Joi.number().min(0).max(9).required(),
     name: Joi.string().required(),
@@ -42,4 +42,6 @@ const writeRecruitSchema = Joi.object()
   })
   .unknown();
 
-export { writeRecruitSchema };
+export const addIntroductions = Joi.object().keys({
+  no: Joi.string().length(12).required(),
+});
