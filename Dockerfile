@@ -10,4 +10,4 @@ RUN npm i typescript
 
 ENV NODE_ENV development
 
-RUN ["npm", "start"]
+CMD ["npm", "start"]
