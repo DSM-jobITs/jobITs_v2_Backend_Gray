@@ -17,7 +17,7 @@ export class Qualification extends ValidationEntity {
   @PrimaryColumn({ name: "qualification_id", length: 30 })
   qualificationId: string;
 
-  @Column({ nullable: false })
+  @Column({ nullable: true })
   @Min(1)
   @Max(100)
   grade: number;
