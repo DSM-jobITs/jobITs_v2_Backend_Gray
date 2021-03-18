@@ -134,7 +134,12 @@ export class RecruitController {
     const page = req.query["page"];
     const recruits = await this.recruitService.getRecruits(Number(page));
     const response = _.map(recruits, (e) => {
-      return _.pick(e, ["recruitNo", "enterprise.name", "reception"]);
+      return _.pick(e, [
+        "recruitNo",
+        "recruitId",
+        "enterprise.name",
+        "reception",
+      ]);
     });
     console.log(response);
     res.status(200).json(response);
