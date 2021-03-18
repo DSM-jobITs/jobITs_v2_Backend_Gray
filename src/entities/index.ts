@@ -5,7 +5,6 @@ export * from "./user";
 export * from "./recruit";
 export * from "./qualification";
 export * from "./certificate";
-export * from "./specialty";
 export * from "./manager";
 export * from "./meal";
 export * from "./welfare";
