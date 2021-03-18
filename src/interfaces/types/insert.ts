@@ -57,13 +57,8 @@ export interface MealInsertType {
 export interface QualificationInsertType {
   qualificationId: string;
   grade: number;
-  recruitId: string;
-}
-
-export interface SpecialtyInsertType {
-  specialtyId: string;
   specialty: string;
-  qualificationId: string;
+  recruitId: string;
 }
 
 export interface WelfareInsertType {
