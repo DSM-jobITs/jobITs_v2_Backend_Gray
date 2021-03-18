@@ -30,8 +30,8 @@ export class RecruitRepository {
       .createQueryBuilder("recruit")
       .leftJoinAndSelect("recruit.enterprise", "enterprise")
       .orderBy("recruit.recruitNo", "DESC")
-      .skip(page * 10)
-      .take(10)
+      .skip(page * 7)
+      .take(7)
       .getMany();
   }
 }
