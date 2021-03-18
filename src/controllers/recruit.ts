@@ -1,23 +1,25 @@
-import { RecruitService } from "@/services";
+import {
+  CertificateService,
+  EnterpriseService,
+  IntroductionService,
+  ManagerService,
+  MealService,
+  QualificationService,
+  RecruitService,
+  WelfareService,
+} from "@/services";
 import { Request, Response, NextFunction } from "express";
 import {
   CertificateRepository,
   EnterpriseRepository,
+  IntroductionRepository,
   ManagerRepository,
   MealRepository,
   QualificationRepository,
   RecruitRepository,
-  SpecialtyRepository,
   WelfareRepository,
 } from "@/repositories";
 import { getCustomRepository } from "typeorm";
-import { EnterpriseService } from "@/services/enterprise";
-import { CertificateService } from "@/services/certificate";
-import { ManagerService } from "@/services/manager";
-import { MealService } from "@/services/meal";
-import { QualificationService } from "@/services/qualification";
-import { SpecialtyService } from "@/services/specialty";
-import { WelfareService } from "@/services/welfare";
 import {
   EnterpriseInsertType,
   ManagerInsertType,
@@ -27,8 +29,6 @@ import {
   WelfareInsertType,
 } from "@/interfaces";
 import { mkId } from "@/utils";
-import { IntroductionRepository } from "@/repositories/introuction";
-import { IntroductionService } from "@/services/introduction";
 
 export class RecruitController {
   private recruitRepository: RecruitRepository = getCustomRepository(
@@ -49,9 +49,6 @@ export class RecruitController {
   );
   private introductionRepository: IntroductionRepository = getCustomRepository(
     IntroductionRepository
-  );
-  private specialtyRepository: SpecialtyRepository = getCustomRepository(
-    SpecialtyRepository
   );
   private welfareRepository: WelfareRepository = getCustomRepository(
     WelfareRepository
@@ -75,9 +72,6 @@ export class RecruitController {
   );
   private introductionService: IntroductionService = new IntroductionService(
     this.introductionRepository
-  );
-  private specialtyService: SpecialtyService = new SpecialtyService(
-    this.specialtyRepository
   );
   private welfareService: WelfareService = new WelfareService(
     this.welfareRepository
@@ -107,14 +101,6 @@ export class RecruitController {
         qualificationId,
         certificateId,
         certificate,
-      });
-    }
-    for (let specialty of req.body.specialties) {
-      const specialtyId: string = await mkId();
-      await this.specialtyService.createSpecialty({
-        qualificationId,
-        specialtyId,
-        specialty,
       });
     }
     res.status(201).end();
