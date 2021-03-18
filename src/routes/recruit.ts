@@ -33,4 +33,11 @@ export default (app: Router) => {
     uploadMiddleware.array("files", 2),
     tryCatchMiddleware.Error(recruitController.uploadIntroductionFiles)
   );
+
+  router.get(
+    "/admin",
+    authMiddleware,
+    adminCheckMiddleware,
+    tryCatchMiddleware.Error(recruitController.getTenRecruits)
+  );
 };
