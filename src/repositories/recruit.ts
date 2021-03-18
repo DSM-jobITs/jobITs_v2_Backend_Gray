@@ -24,4 +24,14 @@ export class RecruitRepository {
       throw AlreadyExistsData;
     }
   }
+
+  public async findTenRecruits(page: number) {
+    return await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .leftJoinAndSelect("recruit.enterprise", "enterprise")
+      .orderBy("recruit.recruitNo", "DESC")
+      .skip(page * 10)
+      .take(10)
+      .getMany();
+  }
 }
