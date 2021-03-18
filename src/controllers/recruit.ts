@@ -29,6 +29,7 @@ import {
   WelfareInsertType,
 } from "@/interfaces";
 import { mkId } from "@/utils";
+import _ from "lodash";
 
 export class RecruitController {
   private recruitRepository: RecruitRepository = getCustomRepository(
@@ -123,5 +124,19 @@ export class RecruitController {
       });
     }
     res.status(201).end();
+  };
+
+  public getTenRecruits = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const page = req.query["page"];
+    const recruits = await this.recruitService.getRecruits(Number(page));
+    const response = _.map(recruits, (e) => {
+      return _.pick(e, ["recruitNo", "enterprise.name", "reception"]);
+    });
+    console.log(response);
+    res.status(200).json(response);
   };
 }
