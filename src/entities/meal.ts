@@ -4,7 +4,7 @@ import { Recruit } from "./recruit";
 
 @Entity()
 export class Meal extends ValidationEntity {
-  @PrimaryColumn({ length: 30, name: "recruit_id" })
+  @PrimaryColumn({ name: "recruit_id", length: 30 })
   recruitId: string;
 
   @Column({ type: "tinyint", default: false })
@@ -23,6 +23,6 @@ export class Meal extends ValidationEntity {
     onUpdate: "CASCADE",
     onDelete: "CASCADE",
   })
-  @JoinColumn({ name: "recruit_id" })
+  @JoinColumn({ name: "recruit_id", referencedColumnName: "recruitId" })
   recruit: Recruit;
 }
