@@ -7,4 +7,8 @@ export class RecruitService {
   public async createRecruit(insertRequest: RecruitInsertType) {
     await this.recruitRepository.createRecruit(insertRequest);
   }
+
+  public async getRecruits(page: number) {
+    return await this.recruitRepository.findTenRecruits(page);
+  }
 }
