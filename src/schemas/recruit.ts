@@ -19,7 +19,7 @@ export const writeRecruitSchema = Joi.object()
     detail: Joi.string().max(255).required(),
     certificates: Joi.array().items(Joi.string()),
     grade: Joi.number().min(1).max(100).required(),
-    specialties: Joi.array().items(Joi.string()),
+    specialty: Joi.string().max(60),
     startTime: Joi.string()
       .regex(/^([0-9]{2})\:([0-9]{2})$/)
       .required(),
