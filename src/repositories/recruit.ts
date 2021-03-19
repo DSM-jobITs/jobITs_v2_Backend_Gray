@@ -8,7 +8,7 @@ export class RecruitRepository {
   public async findOneById(id: string): Promise<Recruit> {
     return await getRepository(Recruit)
       .createQueryBuilder("recruit")
-      .where("recruit.id = :id", { id })
+      .where("recruit.recruitId = :id", { id })
       .getOne();
   }
 
