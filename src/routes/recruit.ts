@@ -8,7 +8,12 @@ import {
   uploadMiddleware,
 } from "@/middlewares";
 import { RecruitController } from "@/controllers";
-import { addIntroductions, writeRecruitSchema } from "@/schemas";
+import {
+  addIntroductions,
+  getRecruitsList,
+  removeRecruit,
+  writeRecruitSchema,
+} from "@/schemas";
 
 const router = Router();
 
@@ -38,6 +43,15 @@ export default (app: Router) => {
     "/admin",
     authMiddleware,
     adminCheckMiddleware,
+    validate({ schema: getRecruitsList, parameters: Parameters.QUERY }),
     tryCatchMiddleware.Error(recruitController.getTenRecruits)
+  );
+
+  router.delete(
+    "/:id",
+    authMiddleware,
+    adminCheckMiddleware,
+    validate({ schema: removeRecruit, parameters: Parameters.PARAM }),
+    tryCatchMiddleware.Error(recruitController.removeRecruit)
   );
 };
