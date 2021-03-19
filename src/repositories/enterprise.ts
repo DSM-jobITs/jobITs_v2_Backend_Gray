@@ -26,4 +26,12 @@ export class EnterpriseRepository {
       .where("entNo = :entNo", { entNo })
       .execute();
   }
+
+  public async removeEnterprise(entNo: string) {
+    await getRepository(Enterprise)
+      .createQueryBuilder("enterprise")
+      .delete()
+      .where("entNo = :entNo", { entNo })
+      .execute();
+  }
 }
