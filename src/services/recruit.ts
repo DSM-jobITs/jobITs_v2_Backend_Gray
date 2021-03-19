@@ -1,8 +1,13 @@
+import { Recruit } from "@/entities";
 import { RecruitInsertType } from "@/interfaces";
 import { RecruitRepository } from "@/repositories";
 
 export class RecruitService {
   constructor(private readonly recruitRepository: RecruitRepository) {}
+
+  public async findRecruit(recruitId: string): Promise<Recruit> {
+    return await this.recruitRepository.findOneById(recruitId);
+  }
 
   public async createRecruit(insertRequest: RecruitInsertType) {
     await this.recruitRepository.createRecruit(insertRequest);
