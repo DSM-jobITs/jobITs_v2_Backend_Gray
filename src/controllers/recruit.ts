@@ -30,6 +30,8 @@ import {
 } from "@/interfaces";
 import { mkId } from "@/utils";
 import _ from "lodash";
+import { Recruit } from "@/entities";
+import { RecruitNotFound } from "@/exception";
 
 export class RecruitController {
   private recruitRepository: RecruitRepository = getCustomRepository(
@@ -141,7 +143,18 @@ export class RecruitController {
         "reception",
       ]);
     });
-    console.log(response);
     res.status(200).json(response);
+  };
+
+  public removeRecruit = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const recruitId: string = req.params.id;
+    const recruit: Recruit = await this.recruitService.findRecruit(recruitId);
+    if (!recruit) next(RecruitNotFound);
+    await this.enterpriseService.removeEnterprise(recruit.entNo);
+    res.status(204).end();
   };
 }
