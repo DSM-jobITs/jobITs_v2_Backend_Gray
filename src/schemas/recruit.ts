@@ -45,3 +45,11 @@ export const writeRecruitSchema = Joi.object()
 export const addIntroductions = Joi.object().keys({
   no: Joi.string().length(12).required(),
 });
+
+export const getRecruitsList = Joi.object().keys({
+  page: Joi.string().required(),
+});
+
+export const removeRecruit = Joi.object().keys({
+  id: Joi.string().required(),
+});
