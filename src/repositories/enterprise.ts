@@ -1,6 +1,6 @@
 import { Enterprise } from "@/entities";
 import { AlreadyExistsData } from "@/exception";
-import { EnterpriseInsertType } from "@/interfaces";
+import { EnterpriseInsertType, EnterpriseUpdateType } from "@/interfaces";
 import { EntityRepository, getRepository } from "typeorm";
 
 @EntityRepository(Enterprise)
@@ -33,5 +33,24 @@ export class EnterpriseRepository {
       .delete()
       .where("entNo = :entNo", { entNo })
       .execute();
+  }
+
+  public async updateEnterprise(
+    entNo: string,
+    updateRequest: EnterpriseUpdateType
+  ) {
+    await getRepository(Enterprise)
+      .createQueryBuilder("enterprise")
+      .update(Enterprise)
+      .set(updateRequest)
+      .where("entNo = :entNo", { entNo })
+      .execute();
+  }
+
+  public async findEnterprise(entNo: string): Promise<Enterprise> {
+    return await getRepository(Enterprise)
+      .createQueryBuilder("enterprise")
+      .where("entNo = :entNo", { entNo })
+      .getOne();
   }
 }
