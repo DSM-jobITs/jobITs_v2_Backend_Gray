@@ -1,5 +1,5 @@
 import { Recruit } from "@/entities";
-import { RecruitInsertType } from "@/interfaces";
+import { RecruitInsertType, RecruitUpdateType } from "@/interfaces";
 import { RecruitRepository } from "@/repositories";
 
 export class RecruitService {
@@ -15,5 +15,12 @@ export class RecruitService {
 
   public async getRecruits(page: number) {
     return await this.recruitRepository.findTenRecruits(page);
+  }
+
+  public async updateRecruit(
+    recruitId: string,
+    updateRequest: RecruitUpdateType
+  ) {
+    await this.recruitRepository.updateRecruit(recruitId, updateRequest);
   }
 }
