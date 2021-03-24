@@ -1,4 +1,4 @@
-import { WelfareInsertType } from "@/interfaces";
+import { WelfareInsertType, WelfareUpdateType } from "@/interfaces";
 import { WelfareRepository } from "@/repositories";
 
 export class WelfareService {
@@ -6,5 +6,12 @@ export class WelfareService {
 
   public async createWelfare(insertRequest: WelfareInsertType) {
     await this.welfareRepository.createWelfare(insertRequest);
+  }
+
+  public async updateWelfare(
+    recruitId: string,
+    updateRequest: WelfareUpdateType
+  ) {
+    await this.welfareRepository.updateWelfare(recruitId, updateRequest);
   }
 }
