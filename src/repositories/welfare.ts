@@ -1,6 +1,6 @@
 import { Welfare } from "@/entities";
 import { AlreadyExistsData } from "@/exception";
-import { WelfareInsertType } from "@/interfaces";
+import { WelfareInsertType, WelfareUpdateType } from "@/interfaces";
 import { EntityRepository, getRepository } from "typeorm";
 
 @EntityRepository(Welfare)
@@ -16,5 +16,16 @@ export class WelfareRepository {
     } catch (e) {
       throw AlreadyExistsData;
     }
+  }
+  public async updateWelfare(
+    recruitId: string,
+    updateRequest: WelfareUpdateType
+  ) {
+    await getRepository(Welfare)
+      .createQueryBuilder("welfare")
+      .update(Welfare)
+      .set(updateRequest)
+      .where("recruitId = :recruitId", { recruitId })
+      .execute();
   }
 }
