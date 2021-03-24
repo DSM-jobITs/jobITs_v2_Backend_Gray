@@ -8,7 +8,7 @@ export class CertificateRepository {
   public async createCertificate(insertRequest: CertificateInsertType) {
     try {
       await getRepository(Certificate)
-        .createQueryBuilder("enterprise")
+        .createQueryBuilder("certificate")
         .insert()
         .into(Certificate)
         .values(insertRequest)
@@ -16,5 +16,13 @@ export class CertificateRepository {
     } catch (e) {
       throw AlreadyExistsData;
     }
+  }
+  public async deleteCertificates(qualificationId: string) {
+    await getRepository(Certificate)
+      .createQueryBuilder("certificate")
+      .delete()
+      .from(Certificate)
+      .where("qualificationId = :qualificationId", { qualificationId })
+      .execute();
   }
 }
