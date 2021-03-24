@@ -13,6 +13,7 @@ import {
   getRecruitsList,
   removeRecruit,
   writeRecruitSchema,
+  updateRecruit,
 } from "@/schemas";
 
 const router = Router();
@@ -53,5 +54,14 @@ export default (app: Router) => {
     adminCheckMiddleware,
     validate({ schema: removeRecruit, parameters: Parameters.PARAM }),
     tryCatchMiddleware.Error(recruitController.removeRecruit)
+  );
+
+  router.put(
+    "/:id",
+    authMiddleware,
+    adminCheckMiddleware,
+    validate({ schema: updateRecruit, parameters: Parameters.PARAM }),
+    validate({ schema: writeRecruitSchema, parameters: Parameters.BODY }),
+    tryCatchMiddleware.Error(recruitController.updateRecruit)
   );
 };
