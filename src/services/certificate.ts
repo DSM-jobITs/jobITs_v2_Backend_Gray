@@ -7,4 +7,8 @@ export class CertificateService {
   public async createCertificate(insertRequest: CertificateInsertType) {
     await this.certificateRepository.createCertificate(insertRequest);
   }
+
+  public async deleteCertificates(qualificationId: string) {
+    await this.certificateRepository.deleteCertificates(qualificationId);
+  }
 }
