@@ -1,6 +1,6 @@
 import { Qualification } from "@/entities";
 import { AlreadyExistsData } from "@/exception";
-import { QualificationInsertType } from "@/interfaces";
+import { QualificationInsertType, QualificationUpdateType } from "@/interfaces";
 import { EntityRepository, getRepository } from "typeorm";
 
 @EntityRepository(Qualification)
@@ -16,5 +16,22 @@ export class QualificationRepository {
     } catch (e) {
       throw AlreadyExistsData;
     }
+  }
+  public async updateQualification(
+    recruitId: string,
+    updateRequest: QualificationUpdateType
+  ) {
+    await getRepository(Qualification)
+      .createQueryBuilder("qualification")
+      .update(Qualification)
+      .set(updateRequest)
+      .where("recruitId = :recruitId", { recruitId })
+      .execute();
+  }
+  public async findQualification(recruitId: string): Promise<Qualification> {
+    return await getRepository(Qualification)
+      .createQueryBuilder("qualification")
+      .where("recruitId = :recruitId", { recruitId })
+      .getOne();
   }
 }
