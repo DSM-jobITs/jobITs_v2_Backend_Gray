@@ -1,6 +1,6 @@
 import { Recruit } from "@/entities";
 import { AlreadyExistsData } from "@/exception";
-import { RecruitInsertType } from "@/interfaces";
+import { RecruitInsertType, RecruitUpdateType } from "@/interfaces";
 import { EntityRepository, getRepository } from "typeorm";
 
 @EntityRepository(Recruit)
@@ -33,5 +33,17 @@ export class RecruitRepository {
       .skip(page * 7)
       .take(7)
       .getMany();
+  }
+
+  public async updateRecruit(
+    recruitId: string,
+    updateRequest: RecruitUpdateType
+  ) {
+    await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .update(Recruit)
+      .set(updateRequest)
+      .where("recruitId = :recruitId", { recruitId })
+      .execute();
   }
 }
