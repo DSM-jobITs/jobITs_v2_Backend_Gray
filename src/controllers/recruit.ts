@@ -22,15 +22,21 @@ import {
 import { getCustomRepository } from "typeorm";
 import {
   EnterpriseInsertType,
+  EnterpriseUpdateType,
   ManagerInsertType,
+  ManagerUpdateType,
   MealInsertType,
+  MealUpdateType,
   QualificationInsertType,
+  QualificationUpdateType,
   RecruitInsertType,
+  RecruitUpdateType,
   WelfareInsertType,
+  WelfareUpdateType,
 } from "@/interfaces";
 import { mkId } from "@/utils";
 import _ from "lodash";
-import { Recruit } from "@/entities";
+import { Enterprise, Recruit } from "@/entities";
 import { RecruitNotFound } from "@/exception";
 
 export class RecruitController {
@@ -156,5 +162,51 @@ export class RecruitController {
     if (!recruit) next(RecruitNotFound);
     await this.enterpriseService.removeEnterprise(recruit.entNo);
     res.status(204).end();
+  };
+
+  public updateRecruit = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const recruitId: string = req.params.id;
+    const recruit: Recruit = await this.recruitService.findRecruit(recruitId);
+    if (!recruit) next(RecruitNotFound);
+    await this.enterpriseService.updateEnterprise(
+      recruit.entNo,
+      req.body as EnterpriseUpdateType
+    );
+    await this.recruitService.updateRecruit(
+      recruitId,
+      req.body as RecruitUpdateType
+    );
+    console.log(2);
+    await this.managerService.updateManager(req.body as ManagerUpdateType);
+    console.log(3);
+    await this.mealService.updateMeal(recruitId, req.body as MealUpdateType);
+    console.log(4);
+    await this.qualificationService.updateQualification(
+      recruitId,
+      req.body as QualificationUpdateType
+    );
+    await this.welfareService.updateWelfare(
+      recruitId,
+      req.body as WelfareUpdateType
+    );
+    const qualification = await this.qualificationService.findQualification(
+      recruitId
+    );
+    await this.certificateService.deleteCertificates(
+      qualification.qualificationId
+    );
+    for (let certificate of req.body.certificates) {
+      const certificateId: string = await mkId();
+      await this.certificateService.createCertificate({
+        qualificationId: qualification.qualificationId,
+        certificateId,
+        certificate,
+      });
+    }
+    res.status(200).end();
   };
 }
