@@ -171,38 +171,25 @@ export class RecruitController {
   ) => {
     const recruitId: string = req.params.id;
     const recruit: Recruit = await this.recruitService.findRecruit(recruitId);
+    const recruitNo: number = recruit.recruitNo;
     if (!recruit) next(RecruitNotFound);
-    await this.enterpriseService.updateEnterprise(
-      recruit.entNo,
-      req.body as EnterpriseUpdateType
+    await this.enterpriseService.removeEnterprise(recruit.entNo);
+    const qualificationId: string = await mkId();
+    Object.assign(req.body, { recruitId, qualificationId, recruitNo });
+    await this.enterpriseService.createEnterprise(
+      req.body as EnterpriseInsertType
     );
-    await this.recruitService.updateRecruit(
-      recruitId,
-      req.body as RecruitUpdateType
+    await this.recruitService.createRecruit(req.body as RecruitInsertType);
+    await this.qualificationService.createQualification(
+      req.body as QualificationInsertType
     );
-    console.log(2);
-    await this.managerService.updateManager(req.body as ManagerUpdateType);
-    console.log(3);
-    await this.mealService.updateMeal(recruitId, req.body as MealUpdateType);
-    console.log(4);
-    await this.qualificationService.updateQualification(
-      recruitId,
-      req.body as QualificationUpdateType
-    );
-    await this.welfareService.updateWelfare(
-      recruitId,
-      req.body as WelfareUpdateType
-    );
-    const qualification = await this.qualificationService.findQualification(
-      recruitId
-    );
-    await this.certificateService.deleteCertificates(
-      qualification.qualificationId
-    );
+    await this.welfareService.createWelfare(req.body as WelfareInsertType);
+    await this.mealService.createMeal(req.body as MealInsertType);
+    await this.managerService.createManager(req.body as ManagerInsertType);
     for (let certificate of req.body.certificates) {
       const certificateId: string = await mkId();
       await this.certificateService.createCertificate({
-        qualificationId: qualification.qualificationId,
+        qualificationId,
         certificateId,
         certificate,
       });
