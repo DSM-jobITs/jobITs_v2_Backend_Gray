@@ -141,6 +141,7 @@ export class RecruitController {
   ) => {
     const page = req.query["page"];
     const recruits = await this.recruitService.getRecruits(Number(page));
+    const allRecruits = await this.recruitService.getAllRecruits();
     const response = _.map(recruits, (e) => {
       return _.pick(e, [
         "recruitNo",
@@ -149,7 +150,9 @@ export class RecruitController {
         "reception",
       ]);
     });
-    res.status(200).json(response);
+    res
+      .status(200)
+      .json({ response, maxPage: Math.ceil(allRecruits.length / 7) });
   };
 
   public removeRecruit = async (
