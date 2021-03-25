@@ -13,6 +13,7 @@ export interface EnterpriseInsertType {
 
 export interface RecruitInsertType {
   recruitId: string;
+  recruitNo: number;
   reception: string;
   deadline: string;
   recruitPlan: boolean;
