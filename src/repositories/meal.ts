@@ -8,7 +8,7 @@ export class MealRepository {
   public async createMeal(insertRequest: MealInsertType) {
     try {
       await getRepository(Meal)
-        .createQueryBuilder("qualification")
+        .createQueryBuilder("meal")
         .insert()
         .into(Meal)
         .values(insertRequest)
