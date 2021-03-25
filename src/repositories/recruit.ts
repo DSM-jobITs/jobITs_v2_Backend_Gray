@@ -25,7 +25,7 @@ export class RecruitRepository {
     }
   }
 
-  public async findTenRecruits(page: number) {
+  public async findSevenRecruits(page: number) {
     return await getRepository(Recruit)
       .createQueryBuilder("recruit")
       .leftJoinAndSelect("recruit.enterprise", "enterprise")
@@ -33,6 +33,10 @@ export class RecruitRepository {
       .skip(page * 7)
       .take(7)
       .getMany();
+  }
+
+  public async findAllRecruits(): Promise<Array<Recruit>> {
+    return await getRepository(Recruit).createQueryBuilder("recruit").getMany();
   }
 
   public async updateRecruit(
