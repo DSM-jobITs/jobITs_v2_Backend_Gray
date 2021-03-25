@@ -14,7 +14,11 @@ export class RecruitService {
   }
 
   public async getRecruits(page: number) {
-    return await this.recruitRepository.findTenRecruits(page);
+    return await this.recruitRepository.findSevenRecruits(page);
+  }
+
+  public async getAllRecruits() {
+    return await this.recruitRepository.findAllRecruits();
   }
 
   public async updateRecruit(
