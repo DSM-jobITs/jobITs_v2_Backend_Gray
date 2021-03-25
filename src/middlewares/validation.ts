@@ -20,6 +20,6 @@ export default ({
     await schema.validateAsync(req[parameters]);
     next();
   } catch (e) {
-    next(BadRequest);
+    next(BadRequest(e.message));
   }
 };
