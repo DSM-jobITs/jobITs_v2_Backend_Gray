@@ -20,12 +20,8 @@ export const writeRecruitSchema = Joi.object()
     certificates: Joi.array().items(Joi.string()),
     grade: Joi.number().min(1).max(100).required(),
     specialty: Joi.string().max(60),
-    startTime: Joi.string()
-      .regex(/^([0-9]{2})\:([0-9]{2})$/)
-      .required(),
-    endTime: Joi.string()
-      .regex(/^([0-9]{2})\:([0-9]{2})$/)
-      .required(),
+    startTime: Joi.string().regex(/^([0-9]{2})\:([0-9]{2})$/),
+    endTime: Joi.string().regex(/^([0-9]{2})\:([0-9]{2})$/),
     salary: Joi.number().required(),
     period: Joi.number().required(),
     breakfast: Joi.boolean(),
@@ -62,12 +58,8 @@ export const updateRecruitSchema = Joi.object()
     certificates: Joi.array().items(Joi.string()),
     grade: Joi.number().min(1).max(100).required(),
     specialty: Joi.string().max(60),
-    startTime: Joi.string()
-      .regex(/^([0-9]{2})\:([0-9]{2})$/)
-      .required(),
-    endTime: Joi.string()
-      .regex(/^([0-9]{2})\:([0-9]{2})$/)
-      .required(),
+    startTime: Joi.string().regex(/^([0-9]{2})\:([0-9]{2})$/),
+    endTime: Joi.string().regex(/^([0-9]{2})\:([0-9]{2})$/),
     salary: Joi.number().required(),
     period: Joi.number().required(),
     breakfast: Joi.boolean(),
