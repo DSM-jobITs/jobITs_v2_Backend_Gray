@@ -97,6 +97,14 @@ export class RecruitController {
     await this.enterpriseService.createEnterprise(
       req.body as EnterpriseInsertType
     );
+    if (!req.body.reception) {
+      const date = new Date();
+      let year = date.getFullYear().toString();
+      let month = date.getMonth().toString();
+      let day = date.getDate().toString();
+      if (month.length < 2) month = "0" + month;
+      req.body.reception = year + "-" + month + "-" + day;
+    }
     await this.recruitService.createRecruit(req.body as RecruitInsertType);
     await this.qualificationService.createQualification(
       req.body as QualificationInsertType
