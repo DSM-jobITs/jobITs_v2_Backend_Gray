@@ -100,7 +100,7 @@ export class RecruitController {
     if (!req.body.reception) {
       const date = new Date();
       let year = date.getFullYear().toString();
-      let month = date.getMonth().toString();
+      let month = (date.getMonth() + 1).toString();
       let day = date.getDate().toString();
       if (month.length < 2) month = "0" + month;
       req.body.reception = year + "-" + month + "-" + day;
