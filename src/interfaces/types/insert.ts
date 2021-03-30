@@ -19,6 +19,7 @@ export interface RecruitInsertType {
   recruitPlan: boolean;
   startTime: string;
   endTime: string;
+  allowance: number;
   salary: number;
   period: number;
   expired: boolean;
@@ -45,6 +46,7 @@ export interface ManagerInsertType {
   managerRank: string;
   managerPhone: string;
   managerEmail: string;
+  managerName: string;
 }
 
 export interface MealInsertType {

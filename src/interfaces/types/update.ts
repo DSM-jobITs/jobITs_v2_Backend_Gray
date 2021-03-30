@@ -17,6 +17,7 @@ export interface RecruitUpdateType {
   recruitPlan: boolean;
   startTime: string;
   endTime: string;
+  allowance: number;
   salary: number;
   period: number;
   expired: boolean;
@@ -40,6 +41,7 @@ export interface ManagerUpdateType {
   managerRank: string;
   managerPhone: string;
   managerEmail: string;
+  managerName: string;
 }
 
 export interface MealUpdateType {
