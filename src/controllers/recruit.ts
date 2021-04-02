@@ -103,6 +103,7 @@ export class RecruitController {
       let month = (date.getMonth() + 1).toString();
       let day = date.getDate().toString();
       if (month.length < 2) month = "0" + month;
+      if (day.length < 2) day = "0" + day;
       req.body.reception = year + "-" + month + "-" + day;
     }
     await this.recruitService.createRecruit(req.body as RecruitInsertType);
@@ -128,7 +129,7 @@ export class RecruitController {
     res: Response,
     next: NextFunction
   ) => {
-    const files = req["files"];
+    const files: Array<File> = req["files"];
     const entNo: string = req.params.no;
     for (let i = 0; i < files.length; i++) {
       const introductionId: string = await mkId();
