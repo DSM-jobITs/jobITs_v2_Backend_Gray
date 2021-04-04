@@ -4,7 +4,7 @@ export const writeRecruitSchema = Joi.object()
   .keys({
     personnel: Joi.number().min(0).max(9).required(),
     name: Joi.string().required(),
-    entNo: Joi.string().length(12).required(),
+    entNo: Joi.string().max(13).required(),
     phone: Joi.string().required(),
     sales: Joi.number(),
     sector: Joi.string(),
@@ -45,7 +45,7 @@ export const updateRecruitSchema = Joi.object()
     personnel: Joi.number().min(0).max(9).required(),
     name: Joi.string().required(),
     entNo: Joi.string().length(12).required(),
-    phone: Joi.string().length(12).required(),
+    phone: Joi.string().max(13).required(),
     sales: Joi.number(),
     sector: Joi.string().required(),
     establishmentDate: Joi.string().isoDate().required(),
