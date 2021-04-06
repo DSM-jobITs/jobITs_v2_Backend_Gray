@@ -4,9 +4,14 @@ import {
   JoinColumn,
   ManyToOne,
   PrimaryGeneratedColumn,
+  OneToMany,
+  OneToOne,
 } from "typeorm";
 import { ValidationEntity } from "./validation";
 import { Enterprise } from "./enterprise";
+import { Qualification } from "./qualification";
+import { Meal } from "./meal";
+import { Welfare } from "./welfare";
 
 @Entity()
 export class Recruit extends ValidationEntity {
@@ -70,4 +75,13 @@ export class Recruit extends ValidationEntity {
   })
   @JoinColumn({ name: "ent_no" })
   enterprise!: Enterprise;
+
+  @OneToOne((type) => Qualification, (qualification) => qualification.recruit)
+  qualification!: Qualification;
+
+  @OneToOne((type) => Meal, (meal) => meal.recruit)
+  meal!: Meal;
+
+  @OneToOne((type) => Welfare, (welfare) => welfare.recruit)
+  welfare!: Welfare;
 }
