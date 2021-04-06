@@ -11,4 +11,8 @@ export class CertificateService {
   public async deleteCertificates(qualificationId: string) {
     await this.certificateRepository.deleteCertificates(qualificationId);
   }
+
+  public async getCertificates(qualificationId: string) {
+    return await this.certificateRepository.getCertificates(qualificationId);
+  }
 }

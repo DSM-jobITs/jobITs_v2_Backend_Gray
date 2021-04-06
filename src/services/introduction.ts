@@ -9,4 +9,8 @@ export class IntroductionService {
   public async createIntroduction(insertRequest: IntroductionInsertType) {
     await this.introductionRepository.creaetIntroduction(insertRequest);
   }
+
+  public async getIntroductions(entNo: string) {
+    return await this.introductionRepository.getIntroductions(entNo);
+  }
 }

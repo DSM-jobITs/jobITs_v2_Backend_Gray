@@ -27,4 +27,8 @@ export class RecruitService {
   ) {
     await this.recruitRepository.updateRecruit(recruitId, updateRequest);
   }
+
+  public async getDetailRecruit(recruitId: string) {
+    return await this.recruitRepository.getDetailRecruit(recruitId);
+  }
 }
