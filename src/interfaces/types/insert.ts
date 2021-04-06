@@ -19,7 +19,7 @@ export interface RecruitInsertType {
   recruitPlan: boolean;
   startTime: string;
   endTime: string;
-  allowance: number;
+  allowance: string;
   salary: number;
   period: number;
   expired: boolean;
