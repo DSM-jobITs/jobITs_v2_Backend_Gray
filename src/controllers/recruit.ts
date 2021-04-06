@@ -208,4 +208,78 @@ export class RecruitController {
     }
     res.status(200).end();
   };
+
+  public getDetailRecruit = async (
+    req: Request,
+    res: Response,
+    next: NextFunction
+  ) => {
+    const recruitId: string = req.params.id;
+    const recruit = await this.recruitService.getDetailRecruit(recruitId);
+    const introductions = await this.introductionService.getIntroductions(
+      recruit.entNo
+    );
+    const certificates = await this.certificateService.getCertificates(
+      recruit.qualification.qualificationId
+    );
+
+    const file = introductions.map((e) => {
+      return { name: e.originalName, url: e.fileUuid };
+    });
+    const certificate = certificates.map((e) => e.certificate);
+
+    const response = {
+      entName: recruit.enterprise.name,
+      entNo: recruit.entNo.split("-").join(""),
+      introduction: recruit.enterprise.introduce,
+      deadline: recruit.deadline,
+      workContent: recruit.detail,
+      qualification: {
+        certificate,
+        grade: recruit.qualification.grade,
+        specialty: recruit.qualification.specialty,
+      },
+      workingConditions: {
+        allowance: recruit.allowance,
+        salary: recruit.salary,
+        period: recruit.period,
+        meal: {
+          breakfast: recruit.meal.breakfast,
+          lunch: recruit.meal.lunch,
+          dinner: recruit.meal.dinner,
+          includeSalary: recruit.meal.mealSalary,
+        },
+        welfare: {
+          fourMajor: recruit.welfare.fourMajor,
+          selfDevelop: recruit.welfare.selfDevelop,
+          laptop: recruit.welfare.laptop,
+          etc: recruit.welfare.etc,
+        },
+      },
+      entInfo: {
+        numOfWorker: recruit.enterprise.workers,
+        entPhone: recruit.enterprise.phone.split("-").join(""),
+        entSales: recruit.enterprise.sales,
+        address: recruit.enterprise.address,
+        establishmentDate: recruit.enterprise.establishmentDate,
+        startTime: recruit.startTime,
+        endTime: recruit.endTime,
+      },
+      manager: {
+        managerRank: recruit.enterprise.manager.managerRank,
+        managerPhone: recruit.enterprise.manager.managerPhone
+          .split("-")
+          .join(""),
+        managerEmail: recruit.enterprise.manager.managerEmail,
+        managerName: recruit.enterprise.manager.managerName,
+      },
+      other: {
+        personnel: recruit.personnel,
+        recruitPlan: recruit.recruitPlan,
+        reception: recruit.reception,
+        file,
+      },
+    };
+    res.status(200).json(response);
+  };
 }
