@@ -15,6 +15,7 @@ import {
   writeRecruitSchema,
   updateRecruit,
   updateRecruitSchema,
+  getDetailRecruit,
 } from "@/schemas";
 
 const router = Router();
@@ -47,6 +48,14 @@ export default (app: Router) => {
     adminCheckMiddleware,
     validate({ schema: getRecruitsList, parameters: Parameters.QUERY }),
     tryCatchMiddleware.Error(recruitController.getTenRecruits)
+  );
+
+  router.get(
+    "/admin/:id",
+    authMiddleware,
+    adminCheckMiddleware,
+    validate({ schema: getDetailRecruit, parameters: Parameters.QUERY }),
+    tryCatchMiddleware.Error(recruitController.getDetailRecruit)
   );
 
   router.delete(
