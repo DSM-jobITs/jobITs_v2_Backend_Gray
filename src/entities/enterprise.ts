@@ -1,7 +1,8 @@
-import { Entity, PrimaryColumn, Column, OneToMany } from "typeorm";
+import { Entity, PrimaryColumn, Column, OneToMany, OneToOne } from "typeorm";
 import { Introduction } from "./introduction";
 import { ValidationEntity } from "./validation";
 import { Recruit } from "./recruit";
+import { Manager } from "./manager";
 
 @Entity()
 export class Enterprise extends ValidationEntity {
@@ -40,4 +41,7 @@ export class Enterprise extends ValidationEntity {
 
   @OneToMany((type) => Introduction, (introduction) => introduction.enterprise)
   introductinos!: Introduction[];
+
+  @OneToOne((type) => Manager, (manager) => manager.enterprise)
+  manager!: Manager;
 }
