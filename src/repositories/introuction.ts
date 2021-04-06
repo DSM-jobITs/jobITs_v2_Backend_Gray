@@ -25,4 +25,13 @@ export class IntroductionRepository {
       .where("ent_no = :ent_no", { ent_no: entNo })
       .getMany();
   }
+
+  public async deleteIntroductions(entNo: string) {
+    await getRepository(Introduction)
+      .createQueryBuilder("introduction")
+      .delete()
+      .from(Introduction)
+      .where("ent_no = :ent_no", { ent_no: entNo })
+      .execute();
+  }
 }

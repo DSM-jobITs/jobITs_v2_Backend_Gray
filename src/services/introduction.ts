@@ -13,4 +13,8 @@ export class IntroductionService {
   public async getIntroductions(entNo: string) {
     return await this.introductionRepository.getIntroductions(entNo);
   }
+
+  public async deleteIntroductions(entNo: string) {
+    await this.introductionRepository.deleteIntroductions(entNo);
+  }
 }

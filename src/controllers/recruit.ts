@@ -131,6 +131,7 @@ export class RecruitController {
   ) => {
     const files: Array<File> = req["files"];
     const entNo: string = req.params.no;
+    await this.introductionService.deleteIntroductions(entNo);
     for (let i = 0; i < files.length; i++) {
       const introductionId: string = await mkId();
       this.introductionService.createIntroduction({
