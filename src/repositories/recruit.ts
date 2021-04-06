@@ -50,4 +50,16 @@ export class RecruitRepository {
       .where("recruitId = :recruitId", { recruitId })
       .execute();
   }
+
+  public async getDetailRecruit(recruitId: string) {
+    return await getRepository(Recruit)
+      .createQueryBuilder("recruit")
+      .where("recruit.recruitId = :recruitId", { recruitId })
+      .leftJoinAndSelect("recruit.enterprise", "enterprise")
+      .leftJoinAndSelect("recruit.qualification", "qualification")
+      .leftJoinAndSelect("recruit.meal", "meal")
+      .leftJoinAndSelect("recruit.welfare", "welfare")
+      .leftJoinAndSelect("enterprise.manager", "manager")
+      .getOne();
+  }
 }
