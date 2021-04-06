@@ -17,4 +17,12 @@ export class IntroductionRepository {
       throw AlreadyExistsData;
     }
   }
+
+  public async getIntroductions(entNo: string) {
+    return await getRepository(Introduction)
+      .createQueryBuilder("introduction")
+      .select("original_name", "file_uuid")
+      .where("ent_no = :ent_no", { ent_no: entNo })
+      .getMany();
+  }
 }
