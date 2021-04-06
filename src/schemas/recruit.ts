@@ -90,6 +90,10 @@ export const removeRecruit = Joi.object().keys({
   id: Joi.string().required(),
 });
 
+export const getDetailRecruit = Joi.object().keys({
+  id: Joi.string().required(),
+});
+
 export const updateRecruit = Joi.object().keys({
   id: Joi.string().required(),
 });
