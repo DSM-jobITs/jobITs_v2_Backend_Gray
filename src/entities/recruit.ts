@@ -43,8 +43,8 @@ export class Recruit extends ValidationEntity {
   })
   endTime: string;
 
-  @Column({ nullable: true, length: 20 })
-  allowance: string;
+  @Column({ nullable: true })
+  allowance: number;
 
   @Column({ nullable: true })
   salary: number;

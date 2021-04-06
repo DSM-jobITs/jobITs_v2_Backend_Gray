@@ -17,7 +17,7 @@ export interface RecruitUpdateType {
   recruitPlan: boolean;
   startTime: string;
   endTime: string;
-  allowance: string;
+  allowance: number;
   salary: number;
   period: number;
   expired: boolean;
