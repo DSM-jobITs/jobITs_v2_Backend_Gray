@@ -25,4 +25,13 @@ export class CertificateRepository {
       .where("qualificationId = :qualificationId", { qualificationId })
       .execute();
   }
+
+  public async getCertificates(qualificationId: string) {
+    return await getRepository(Certificate)
+      .createQueryBuilder("certificate")
+      .where("qualification_id = :qualification_id", {
+        qualification_id: qualificationId,
+      })
+      .getMany();
+  }
 }
