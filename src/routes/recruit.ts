@@ -54,7 +54,7 @@ export default (app: Router) => {
     "/admin/:id",
     authMiddleware,
     adminCheckMiddleware,
-    validate({ schema: getDetailRecruit, parameters: Parameters.QUERY }),
+    validate({ schema: getDetailRecruit, parameters: Parameters.PARAM }),
     tryCatchMiddleware.Error(recruitController.getDetailRecruit)
   );
 
