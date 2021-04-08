@@ -228,13 +228,23 @@ export class RecruitController {
       return { name: e.originalName, url: e.fileUuid };
     });
     const certificate = certificates.map((e) => e.certificate);
+    const deadline = recruit.deadline.split("-");
+    const reception = recruit.reception.split("-");
+    const establishmentDate = recruit.enterprise.establishmentDate.split("-");
 
     const response = {
-      entName: recruit.enterprise.name,
-      entNo: recruit.entNo.split("-").join(""),
-      introduction: recruit.enterprise.introduce,
-      deadline: recruit.deadline,
-      workContent: recruit.detail,
+      introduce: {
+        entName: recruit.enterprise.name,
+        entNo: recruit.entNo.split("-").join(""),
+        introduction: recruit.enterprise.introduce,
+        deadline: {
+          year: deadline[0],
+          month: deadline[1],
+          day: deadline[2],
+        },
+        workContent: recruit.detail,
+        sector: recruit.enterprise.sector,
+      },
       qualification: {
         certificate,
         grade: recruit.qualification.grade,
@@ -245,15 +255,15 @@ export class RecruitController {
         salary: recruit.salary,
         period: recruit.period,
         meal: {
-          breakfast: recruit.meal.breakfast,
-          lunch: recruit.meal.lunch,
-          dinner: recruit.meal.dinner,
-          includeSalary: recruit.meal.mealSalary,
+          breakfast: Boolean(recruit.meal.breakfast),
+          lunch: Boolean(recruit.meal.lunch),
+          dinner: Boolean(recruit.meal.dinner),
+          includeSalary: Boolean(recruit.meal.mealSalary),
         },
         welfare: {
-          fourMajor: recruit.welfare.fourMajor,
-          selfDevelop: recruit.welfare.selfDevelop,
-          laptop: recruit.welfare.laptop,
+          fourMajor: Boolean(recruit.welfare.fourMajor),
+          selfDevelop: Boolean(recruit.welfare.selfDevelop),
+          laptop: Boolean(recruit.welfare.laptop),
           etc: recruit.welfare.etc,
         },
       },
@@ -262,7 +272,11 @@ export class RecruitController {
         entPhone: recruit.enterprise.phone.split("-").join(""),
         entSales: recruit.enterprise.sales,
         address: recruit.enterprise.address,
-        establishmentDate: recruit.enterprise.establishmentDate,
+        establishmentDate: {
+          year: establishmentDate[0],
+          month: establishmentDate[1],
+          day: establishmentDate[2],
+        },
         startTime: recruit.startTime,
         endTime: recruit.endTime,
       },
@@ -276,8 +290,12 @@ export class RecruitController {
       },
       other: {
         personnel: recruit.personnel,
-        recruitPlan: recruit.recruitPlan,
-        reception: recruit.reception,
+        recruitPlan: Boolean(recruit.recruitPlan),
+        reception: {
+          year: reception[0],
+          month: reception[1],
+          day: reception[2],
+        },
         file,
       },
     };
