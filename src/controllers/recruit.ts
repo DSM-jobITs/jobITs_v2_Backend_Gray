@@ -229,7 +229,6 @@ export class RecruitController {
     });
     const certificate = certificates.map((e) => e.certificate);
     const deadline = recruit.deadline.split("-");
-    const reception = recruit.reception.split("-");
     const establishmentDate = recruit.enterprise.establishmentDate.split("-");
 
     const response = {
@@ -291,11 +290,7 @@ export class RecruitController {
       other: {
         personnel: recruit.personnel,
         recruitPlan: Boolean(recruit.recruitPlan),
-        reception: {
-          year: reception[0],
-          month: reception[1],
-          day: reception[2],
-        },
+        reception: recruit.reception,
         file,
       },
     };
