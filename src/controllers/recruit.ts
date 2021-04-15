@@ -86,6 +86,13 @@ export class RecruitController {
     this.welfareRepository
   );
 
+  makeDateFormat = (date: string) => {
+    let [year, month, day] = date.split("-");
+    if (month.length < 2) month = "0" + month;
+    if (day.length < 2) day = "0" + day;
+    return `${year}-${month}-${day}`;
+  };
+
   public writeRecruitRequest = async (
     req: Request,
     res: Response,
@@ -106,6 +113,10 @@ export class RecruitController {
       if (day.length < 2) day = "0" + day;
       req.body.reception = year + "-" + month + "-" + day;
     }
+    req.body.establishmentDate = this.makeDateFormat(
+      req.body.establishmentDate
+    );
+    req.body.deadline = this.makeDateFormat(req.body.deadline);
     await this.recruitService.createRecruit(req.body as RecruitInsertType);
     await this.qualificationService.createQualification(
       req.body as QualificationInsertType
