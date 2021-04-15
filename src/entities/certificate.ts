@@ -7,7 +7,7 @@ export class Certificate extends ValidationEntity {
   @PrimaryColumn({ name: "certificate_id", length: 30 })
   certificateId: string;
 
-  @Column({ length: 20 })
+  @Column({ length: 40 })
   certificate: string;
 
   @Column({ name: "qualification_id", length: 30 })

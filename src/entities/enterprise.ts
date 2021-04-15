@@ -18,10 +18,10 @@ export class Enterprise extends ValidationEntity {
   @Column({ length: 15, name: "establishment_date", nullable: true })
   establishmentDate: string;
 
-  @Column({ type: "float", nullable: true })
-  sales: number;
+  @Column({ length: 10, nullable: true })
+  sales: string;
 
-  @Column({ length: 255, nullable: true })
+  @Column({ length: 1000, nullable: true })
   introduce: string;
 
   @Column({ length: 50, nullable: true, default: "정보통신업" })

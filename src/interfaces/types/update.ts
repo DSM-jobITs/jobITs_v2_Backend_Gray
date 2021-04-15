@@ -2,7 +2,7 @@ export interface EnterpriseUpdateType {
   entNo: string;
   name: string;
   phone: string;
-  sales: number;
+  sales: string;
   sector: string;
   establishmentDate: string;
   address: string;
@@ -17,8 +17,8 @@ export interface RecruitUpdateType {
   recruitPlan: boolean;
   startTime: string;
   endTime: string;
-  allowance: number;
-  salary: number;
+  allowance: string;
+  salary: string;
   period: number;
   expired: boolean;
   personnel: number;

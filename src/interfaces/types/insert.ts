@@ -2,7 +2,7 @@ export interface EnterpriseInsertType {
   name: string;
   entNo: string;
   phone: string;
-  sales: number;
+  sales: string;
   sector: string;
   establishmentDate: string;
   address: string;
@@ -19,8 +19,8 @@ export interface RecruitInsertType {
   recruitPlan: boolean;
   startTime: string;
   endTime: string;
-  allowance: number;
-  salary: number;
+  allowance: string;
+  salary: string;
   period: number;
   expired: boolean;
   personnel: number;
