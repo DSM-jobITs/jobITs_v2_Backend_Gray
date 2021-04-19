@@ -124,7 +124,7 @@ export class RecruitController {
     await this.welfareService.createWelfare(req.body as WelfareInsertType);
     await this.mealService.createMeal(req.body as MealInsertType);
     await this.managerService.createManager(req.body as ManagerInsertType);
-    if (req.body.certificates[0] === "") req.body.certificates = null;
+    if (req.body.certificates[0] === "") req.body.certificates = [];
     for (let certificate of req.body.certificates) {
       const certificateId: string = await mkId();
       await this.certificateService.createCertificate({
@@ -211,7 +211,7 @@ export class RecruitController {
     await this.welfareService.createWelfare(req.body as WelfareInsertType);
     await this.mealService.createMeal(req.body as MealInsertType);
     await this.managerService.createManager(req.body as ManagerInsertType);
-    if (req.body.certificates[0] === "") req.body.certificates = null;
+    if (req.body.certificates[0] === "") req.body.certificates = [];
     for (let certificate of req.body.certificates) {
       const certificateId: string = await mkId();
       await this.certificateService.createCertificate({
