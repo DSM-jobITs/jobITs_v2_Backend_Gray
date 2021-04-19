@@ -8,7 +8,7 @@ export const writeRecruitSchema = Joi.object()
     phone: Joi.string().required(),
     sales: Joi.string(),
     sector: Joi.string(),
-    establishmentDate: Joi.string().isoDate().required(),
+    establishmentDate: Joi.string().required(),
     workers: Joi.number().required(),
     address: Joi.string().required(),
     managerRank: Joi.string().required(),
@@ -34,8 +34,8 @@ export const writeRecruitSchema = Joi.object()
     labtop: Joi.boolean(),
     etc: Joi.string(),
     recruitPlan: Joi.boolean().required(),
-    reception: Joi.string().isoDate(),
-    deadline: Joi.string().isoDate().required(),
+    reception: Joi.string(),
+    deadline: Joi.string().required(),
   })
   .unknown();
 
@@ -47,7 +47,7 @@ export const updateRecruitSchema = Joi.object()
     phone: Joi.string().max(13).required(),
     sales: Joi.string(),
     sector: Joi.string().required(),
-    establishmentDate: Joi.string().isoDate().required(),
+    establishmentDate: Joi.string().required(),
     workers: Joi.number().required(),
     address: Joi.string().required(),
     managerRank: Joi.string().required(),
@@ -73,8 +73,8 @@ export const updateRecruitSchema = Joi.object()
     labtop: Joi.boolean(),
     etc: Joi.string(),
     recruitPlan: Joi.boolean().required(),
-    reception: Joi.string().isoDate().required(),
-    deadline: Joi.string().isoDate().required(),
+    reception: Joi.string().required(),
+    deadline: Joi.string().required(),
   })
   .unknown();
 
